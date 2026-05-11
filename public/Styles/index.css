@@ -1,0 +1,83 @@
+/* ==================================================
+   INDEX.CSS - MAIN ENTRY FILE
+   ==================================================
+   This file imports all CSS modules in the correct
+   order to avoid conflicts and ensure consistency.
+   
+   USAGE: 
+   <link rel="stylesheet" href="css/index.css">
+   
+   The previous CSS from all HTML files has been
+   organized into logical modules following:
+   - Base (variables, reset)
+   - Components (reusable UI elements)
+   - Layout (page structure)
+   - Pages (page-specific styles)
+   - Utilities (animations, responsive)
+   ================================================== */
+
+/* Base Styles */
+@import url('./Basis/reset.css');
+@import url('./Basis/variables.css');
+
+/* Layout */
+@import url('./Layout/main.css');
+@import url('./Layout/landing.css');
+@import url('./Layout/exam.css');
+@import url('./Layout/result.css');
+@import url('./Layout/welcome.css');
+
+/* Components */
+@import url('./Komponen/sidebar.css');
+@import url('./Komponen/topbar.css');
+@import url('./Komponen/cards.css');
+@import url('./Komponen/buttons.css');
+@import url('./Komponen/forms.css');
+@import url('./Komponen/tables.css');
+@import url('./Komponen/badges.css');
+@import url('./Komponen/modals.css');
+@import url('./Komponen/toast.css');
+@import url('./Komponen/progress.css');
+@import url('./Komponen/score.css');
+@import url('./Komponen/soal-editor.css');
+
+/* Pages */
+@import url('./Halaman/landing-pages.css');
+@import url('./Halaman/login.css');
+
+/* Utilities */
+@import url('./Fitur/animations.css');
+@import url('./Fitur/responsive.css');
+
+/* ==================================================
+   ADDITIONAL UTILITY CLASSES
+   ================================================== */
+
+/* Text utilities */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+/* Display utilities */
+.d-flex { display: flex; }
+.d-block { display: block; }
+.d-none { display: none; }
+
+/* Flex utilities */
+.flex-column { flex-direction: column; }
+.align-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-1 { gap: 4px; }
+.gap-2 { gap: 8px; }
+.gap-3 { gap: 12px; }
+
+/* Spacing utilities */
+.m-0 { margin: 0; }
+.p-0 { padding: 0; }
+.mt-1 { margin-top: 4px; }
+.mt-2 { margin-top: 8px; }
+.mt-3 { margin-top: 12px; }
+.mb-1 { margin-bottom: 4px; }
+.mb-2 { margin-bottom: 8px; }
+.mb-3 { margin-bottom: 12px; }

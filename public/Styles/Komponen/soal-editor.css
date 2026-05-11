@@ -1,0 +1,51 @@
+/* ==================================================
+   SOAL EDITOR COMPONENT
+   ================================================== */
+
+.option-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 12px;
+  border: 1.5px solid var(--smoke);
+  border-radius: var(--r-md);
+  margin-bottom: 7px;
+  transition: all var(--transition-fast);
+}
+
+.option-item.correct {
+  border-color: var(--emerald);
+  background: #F0FDF4;
+}
+
+.option-label {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: 1.5px solid var(--smoke);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--ash);
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.option-item.correct .option-label {
+  background: var(--emerald);
+  border-color: var(--emerald);
+  color: #fff;
+}
+
+.option-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 13px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--ink);
+}

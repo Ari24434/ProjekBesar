@@ -1,0 +1,138 @@
+/* ==================================================
+   TOPBAR COMPONENT
+   ================================================== */
+
+.topbar {
+  height: var(--bar-h);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--smoke);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  display: flex;
+  align-items: center;
+  padding: 0 26px;
+  gap: 12px;
+}
+
+.tb-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--ink);
+  font-size: 20px;
+  padding: 4px;
+}
+
+.tb-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--slate);
+  flex: 1;
+}
+
+.tb-title strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.tb-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tb-icon-btn {
+  width: 33px;
+  height: 33px;
+  border-radius: var(--r-md);
+  background: transparent;
+  border: 1px solid var(--smoke);
+  color: var(--ash);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.tb-icon-btn:hover {
+  border-color: var(--blue-pale);
+  color: var(--blue-main);
+  background: var(--frost);
+}
+
+.notif-dot {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--crimson);
+  border: 1.5px solid #fff;
+}
+
+/* Admin Pill (for admin dashboard) */
+.tb-admin-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: linear-gradient(135deg, rgba(200, 168, 75, 0.08), rgba(200, 168, 75, 0.15));
+  border: 1px solid rgba(200, 168, 75, 0.3);
+  border-radius: 50px;
+  padding: 4px 11px 4px 4px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.tb-admin-pill:hover {
+  border-color: var(--gold);
+}
+
+/* User Pill (for participant dashboard) */
+.tb-user-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--frost);
+  border: 1px solid var(--blue-pale);
+  border-radius: 50px;
+  padding: 4px 11px 4px 4px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.tb-user-pill:hover {
+  border-color: var(--blue-light);
+}
+
+.tb-pill-av {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue-main), var(--blue-bright));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.tb-pill-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.tb-pill-role {
+  font-size: 10px;
+  color: var(--gold);
+  font-weight: 600;
+  margin-left: 2px;
+}

@@ -1,10 +1,8 @@
 <?php
 session_start();
 
-$env = parse_ini_file(__DIR__ . '/../.env');
-
 define('BASE_PATH', dirname(__DIR__));
-define('BASE_URL', $env['APP_URL'] ?? '');
+define('BASE_URL', "http://localhost");
 
 require BASE_PATH . '/app/Pusat/routing.php';
 

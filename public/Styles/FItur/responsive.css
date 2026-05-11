@@ -1,0 +1,183 @@
+/* ==================================================
+   RESPONSIVE STYLES
+   ================================================== */
+
+/* Tablet and below */
+@media (max-width: 1024px) {
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .form-row-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .exam-wrap {
+    grid-template-columns: 1fr;
+  }
+  
+  .exam-panel {
+    position: static;
+  }
+  
+  .res-breakdown {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+  
+  .res-rank {
+    display: none;
+  }
+}
+
+/* Mobile */
+@media (max-width: 780px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+    box-shadow: 8px 0 30px rgba(0, 0, 0, 0.17);
+  }
+  
+  .main-wrap {
+    margin-left: 0;
+  }
+  
+  .tb-hamburger {
+    display: block;
+  }
+  
+  .page-body {
+    padding: 14px;
+  }
+  
+  .stat-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-row-3 {
+    grid-template-columns: 1fr;
+  }
+  
+  .welcome-banner {
+    padding: 18px 20px;
+  }
+  
+  .wb-name {
+    font-size: 20px;
+  }
+  
+  .admin-banner {
+    padding: 16px 18px;
+  }
+  
+  .ab-name {
+    font-size: 18px;
+  }
+  
+  .ab-right {
+    display: none;
+  }
+  
+  .tb-pill-role {
+    display: none;
+  }
+  
+  .hero {
+    padding: 4rem 0 3rem;
+  }
+  
+  .hero-stats {
+    gap: 1.4rem;
+  }
+  
+  .float-badge {
+    display: none;
+  }
+  
+  .left-panel {
+    width: 100%;
+    padding: 2rem;
+    min-height: auto;
+  }
+  
+  .lp-center {
+    margin: 1.8rem 0 1.4rem;
+  }
+  
+  .right-panel {
+    padding: 2rem 1.5rem 3rem;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .filter-bar {
+    gap: 5px;
+  }
+  
+  .res-score {
+    font-size: 40px;
+  }
+  
+  .exam-wrap {
+    grid-template-columns: 1fr;
+  }
+  
+  .exam-panel {
+    position: static;
+  }
+  
+  .left-panel {
+    padding: 1.5rem;
+  }
+  
+  .right-panel {
+    padding: 1.5rem 1rem 2.5rem;
+  }
+  
+  .lp-heading {
+    font-size: 1.7rem;
+  }
+  
+  .login-title {
+    font-size: 1.8rem;
+  }
+  
+  .hero-title {
+    font-size: 2rem;
+  }
+}
+
+/* Login Page Responsive */
+@media (max-width: 900px) {
+  body {
+    flex-direction: column;
+    overflow: auto;
+  }
+  
+  .left-panel {
+    width: 100%;
+    padding: 2rem;
+    min-height: auto;
+  }
+  
+  .lp-center {
+    margin: 1.8rem 0 1.4rem;
+  }
+  
+  .right-panel {
+    padding: 2rem 1.5rem 3rem;
+  }
+}

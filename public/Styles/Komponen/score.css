@@ -1,0 +1,20 @@
+/* ==================================================
+   SCORE & RESULT COMPONENTS
+   ================================================== */
+
+.score-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.score-pill.pass {
+  color: var(--blue-main);
+}
+
+.score-pill.fail {
+  color: var(--crimson);
+}

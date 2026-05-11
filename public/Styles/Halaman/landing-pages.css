@@ -1,0 +1,449 @@
+/* ==================================================
+   LANDING PAGE ADDITIONAL SECTIONS
+   ================================================== */
+
+/* Stats Band */
+.stats-band {
+  background: var(--navy);
+  padding: 3.2rem 0;
+}
+
+.s-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1;
+}
+
+.s-num span {
+  color: var(--gold);
+}
+
+.s-lbl {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 500;
+  margin-top: 0.35rem;
+}
+
+.s-sep {
+  width: 1px;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.1);
+  align-self: center;
+}
+
+/* Section Headers */
+.sec-chip {
+  display: inline-block;
+  background: var(--blue-ghost);
+  color: var(--blue-main);
+  font-size: 0.71rem;
+  font-weight: 700;
+  padding: 0.32rem 0.85rem;
+  border-radius: 50px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+}
+
+.sec-chip.light {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--blue-pale);
+}
+
+.sec-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.7rem, 3.2vw, 2.5rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.sec-title .acc {
+  color: var(--blue-main);
+}
+
+.sec-title.light {
+  color: var(--white);
+}
+
+.sec-title.light .acc {
+  color: var(--gold);
+}
+
+.sec-sub {
+  font-size: 0.96rem;
+  color: var(--ash);
+  line-height: 1.75;
+  max-width: 540px;
+}
+
+.sec-sub.light {
+  color: rgba(255, 255, 255, 0.52);
+}
+
+/* Features Section */
+.features-sec {
+  padding: 5.5rem 0;
+  background: var(--off-white);
+}
+
+.feat-card {
+  background: var(--white);
+  border: 1px solid var(--smoke);
+  border-radius: var(--r-lg);
+  padding: 1.8rem;
+  height: 100%;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.feat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue-main), var(--blue-bright));
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.feat-card:hover {
+  box-shadow: 0 10px 36px rgba(30, 84, 183, 0.09);
+  transform: translateY(-4px);
+  border-color: var(--blue-pale);
+}
+
+.feat-card:hover::before {
+  opacity: 1;
+}
+
+.feat-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 13px;
+  background: var(--blue-ghost);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  color: var(--blue-main);
+  margin-bottom: 1.1rem;
+}
+
+.feat-title {
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.45rem;
+}
+
+.feat-desc {
+  font-size: 0.855rem;
+  color: var(--ash);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Materi Section */
+.materi-sec {
+  padding: 5.5rem 0;
+}
+
+.mat-card {
+  border-radius: var(--r-lg);
+  padding: 1.9rem 1.9rem 1.9rem 2.1rem;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
+  transition: all var(--transition-normal);
+}
+
+.mat-card.twk {
+  background: linear-gradient(135deg, #EBF2FE 0%, #D6E8FF 100%);
+  border-color: #B8D4F5;
+}
+
+.mat-card.tiu {
+  background: linear-gradient(135deg, #EDF9F0 0%, #D4F2DB 100%);
+  border-color: #B5E6C0;
+}
+
+.mat-card.tkp {
+  background: linear-gradient(135deg, #FFF8EA 0%, #FDEFC8 100%);
+  border-color: #F5DFA0;
+}
+
+.mat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.07);
+}
+
+.mat-tag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 0.28rem 0.75rem;
+  border-radius: 50px;
+  margin-bottom: 0.85rem;
+}
+
+.mat-card.twk .mat-tag {
+  background: var(--blue-main);
+  color: var(--white);
+}
+
+.mat-card.tiu .mat-tag {
+  background: #198754;
+  color: var(--white);
+}
+
+.mat-card.tkp .mat-tag {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+.mat-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.45rem;
+}
+
+.mat-desc {
+  font-size: 0.84rem;
+  color: #4A5568;
+  line-height: 1.7;
+}
+
+.mat-num {
+  position: absolute;
+  right: 1.4rem;
+  top: 1.4rem;
+  font-size: 2.4rem;
+  font-weight: 800;
+  opacity: 0.09;
+  font-family: 'Playfair Display', serif;
+  color: var(--ink);
+}
+
+/* Cara Kerja Section */
+.cara-sec {
+  padding: 5.5rem 0;
+  background: var(--off-white);
+}
+
+.step-item {
+  display: flex;
+  gap: 1.3rem;
+  align-items: flex-start;
+}
+
+.step-num {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--blue-main);
+  color: var(--white);
+  font-weight: 800;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(30, 84, 183, 0.32);
+}
+
+.step-connector {
+  width: 2px;
+  height: 28px;
+  background: linear-gradient(to bottom, var(--blue-main), var(--blue-pale));
+  margin-left: 20px;
+}
+
+.step-body {
+  padding-bottom: 1.8rem;
+}
+
+.step-title {
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.32rem;
+}
+
+.step-desc {
+  font-size: 0.855rem;
+  color: var(--ash);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Testimoni Section */
+.testi-sec {
+  padding: 5.5rem 0;
+  background: var(--navy);
+}
+
+.testi-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--r-lg);
+  padding: 1.7rem;
+  height: 100%;
+  transition: all var(--transition-normal);
+}
+
+.testi-card:hover {
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.testi-stars {
+  color: var(--gold);
+  font-size: 0.83rem;
+  margin-bottom: 0.75rem;
+}
+
+.testi-txt {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.72;
+  font-style: italic;
+  margin-bottom: 1.1rem;
+}
+
+.testi-av {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue-main), var(--blue-bright));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--white);
+  font-size: 0.88rem;
+}
+
+.testi-name {
+  font-size: 0.855rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.testi-role {
+  font-size: 0.73rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 0.1rem;
+}
+
+/* CTA Section */
+.cta-sec {
+  padding: 5.5rem 0;
+  background: linear-gradient(135deg, var(--blue-main) 0%, var(--blue-dark) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-blob {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+}
+
+.cta-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.9rem, 3.8vw, 2.85rem);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.9rem;
+}
+
+.cta-sub {
+  font-size: 0.97rem;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 480px;
+  line-height: 1.75;
+  margin-bottom: 1.9rem;
+}
+
+/* Footer */
+footer {
+  background: var(--navy);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 3.8rem 0 1.8rem;
+}
+
+.foot-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.foot-brand span {
+  color: var(--gold);
+}
+
+.foot-tag {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 0.38rem;
+}
+
+.foot-head {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: rgba(255, 255, 255, 0.35);
+  margin-bottom: 0.9rem;
+}
+
+.foot-link {
+  display: block;
+  font-size: 0.84rem;
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+  margin-bottom: 0.45rem;
+  transition: color var(--transition-fast);
+}
+
+.foot-link:hover {
+  color: var(--white);
+}
+
+.foot-copy {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.foot-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: all var(--transition-fast);
+  margin-right: 0.45rem;
+}
+
+.foot-social a:hover {
+  border-color: var(--blue-bright);
+  color: var(--white);
+  background: rgba(45, 114, 217, 0.14);
+}

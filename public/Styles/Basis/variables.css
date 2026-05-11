@@ -1,0 +1,67 @@
+/* ==================================================
+   DESIGN TOKENS & VARIABLES
+   ================================================== */
+
+:root {
+  /* Color Palette - Navy & Blue */
+  --navy:        #08153A;
+  --blue-dark:   #0D2149;
+  --blue-mid:    #1A3D7C;
+  --blue-main:   #1E54B7;
+  --blue-bright: #2D72D9;
+  --blue-light:  #5B8EF5;
+  --blue-pale:   #DAE5FD;
+  --blue-ghost:  #EBF2FE;
+  
+  /* Neutral Colors */
+  --frost:       #F0F5FF;
+  --white:       #FFFFFF;
+  --off-white:   #F7FAFF;
+  --ink:         #0F1729;
+  --slate:       #475569;
+  --ash:         #94A3B8;
+  --smoke:       #E2E8F5;
+  --cloud:       #F8FAFF;
+  
+  /* Accent Colors */
+  --gold:        #C8A84B;
+  --gold-light:  #F0D070;
+  --emerald:     #10B981;
+  --crimson:     #EF4444;
+  --amber:       #F59E0B;
+  
+  /* Spacing & Sizing */
+  --sb-w: 240px;
+  --bar-h: 60px;
+  
+  /* Border Radius */
+  --r-lg: 16px;
+  --r-md: 10px;
+  --r-sm: 6px;
+  --r-xs: 4px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.22s ease;
+  --transition-slow: 0.3s ease;
+  
+  /* Z-index layers */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-sidebar: 300;
+  --z-modal: 500;
+  --z-toast: 600;
+}
+
+/* Dark mode support - for future enhancement */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Optional: dark mode variables can be defined here */
+  }
+}

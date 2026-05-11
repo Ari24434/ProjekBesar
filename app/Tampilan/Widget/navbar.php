@@ -1,24 +1,25 @@
-<?php
-    $ArrNav = require BASE_PATH . "/app/Tampilan/Widget/navlink.php";
-?>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+<nav class="navbar-oca navbar navbar-expand-lg" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+      <div class="brand-icon"><i class="bi bi-mortarboard-fill text-white" style="font-size:.9rem;"></i></div>
+      <span class="brand-text">Oman's <span>Club</span> Academy</span>
+    </a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" style="color:rgba(255,255,255,.7);">
+      <i class="bi bi-list fs-4"></i>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <?php foreach ($ArrNav as $key => $value) :?>
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="<?= $key ?>"><?= $value ?></a>
-        </li>
-        <?php endforeach; ?>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav mx-auto gap-1">
+        <li class="nav-item"><a class="nav-link-c" href="#beranda">Beranda</a></li>
+        <li class="nav-item"><a class="nav-link-c" href="#fitur">Fitur</a></li>
+        <li class="nav-item"><a class="nav-link-c" href="#materi">Materi SKD</a></li>
+        <li class="nav-item"><a class="nav-link-c" href="#cara">Cara Kerja</a></li>
+        <li class="nav-item"><a class="nav-link-c" href="#testimoni">Testimoni</a></li>
+        <li class="nav-item"><a class="nav-link-c" href="#kontak">Kontak</a></li>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      <div class="d-flex gap-2 mt-3 mt-lg-0">
+        <a href="<?= BASE_URL ?>/login" class="btn btn-nav-masuk">Masuk</a>
+        <a href="https://www.instagram.com/omansclub" target="_blank" class="btn btn-nav-daftar">Daftar Gratis</a>
+      </div>
     </div>
   </div>
 </nav>

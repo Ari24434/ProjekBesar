@@ -1,0 +1,248 @@
+/* ==================================================
+   WELCOME & PROFILE SECTION STYLES
+   ================================================== */
+
+/* Welcome Banner */
+.welcome-banner {
+  background: linear-gradient(135deg, var(--navy) 0%, #0F2970 52%, #1A4ABA 100%);
+  border-radius: var(--r-lg);
+  padding: 26px 30px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+.wb-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 30px 30px;
+  pointer-events: none;
+}
+
+.wb-glow {
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(91, 142, 245, 0.2) 0%, transparent 65%);
+  top: -130px;
+  right: -70px;
+  pointer-events: none;
+}
+
+.wb-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.wb-greeting {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.42);
+  letter-spacing: 0.3px;
+  margin-bottom: 5px;
+}
+
+.wb-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 25px;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 5px;
+}
+
+.wb-sub {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.wb-sub strong {
+  color: rgba(255, 255, 255, 0.78);
+  font-weight: 600;
+}
+
+.wb-pills {
+  display: flex;
+  gap: 7px;
+  margin-top: 13px;
+  flex-wrap: wrap;
+}
+
+.wb-pill {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+/* Admin Banner */
+.admin-banner {
+  background: linear-gradient(135deg, var(--navy) 0%, #0A1E5E 45%, #142B80 100%);
+  border-radius: var(--r-lg);
+  padding: 22px 28px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+.ab-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 30px 30px;
+  pointer-events: none;
+}
+
+.ab-glow-1 {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200, 168, 75, 0.15) 0%, transparent 65%);
+  top: -110px;
+  right: -50px;
+  pointer-events: none;
+}
+
+.ab-glow-2 {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(45, 114, 217, 0.2) 0%, transparent 65%);
+  bottom: -80px;
+  left: 30%;
+  pointer-events: none;
+}
+
+.ab-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.ab-greeting {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.38);
+  letter-spacing: 0.3px;
+  margin-bottom: 4px;
+}
+
+.ab-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+.ab-sub {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.46);
+}
+
+.ab-pills {
+  display: flex;
+  gap: 7px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.ab-pill {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+/* Profile Header */
+.profile-header {
+  background: linear-gradient(135deg, var(--blue-main) 0%, var(--blue-bright) 100%);
+  border-radius: var(--r-lg);
+  padding: 22px 26px;
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  margin-bottom: 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+.prof-av {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  border: 2.5px solid rgba(255, 255, 255, 0.24);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 23px;
+  color: #fff;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.prof-info {
+  position: relative;
+  z-index: 1;
+}
+
+.prof-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 21px;
+  color: #fff;
+  margin-bottom: 3px;
+}
+
+.prof-email {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.52);
+}
+
+.prof-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 7px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.17);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 20px;
+}

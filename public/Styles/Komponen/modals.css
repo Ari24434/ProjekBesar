@@ -1,0 +1,140 @@
+/* ==================================================
+   MODAL & DIALOG COMPONENTS
+   ================================================== */
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 21, 58, 0.48);
+  backdrop-filter: blur(4px);
+  z-index: var(--z-modal);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.modal-overlay.open {
+  display: flex;
+}
+
+/* Modal Container */
+.modal {
+  background: var(--white);
+  border-radius: var(--r-lg);
+  width: 100%;
+  max-width: 580px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(8, 21, 58, 0.2);
+}
+
+.modal-lg {
+  max-width: 700px;
+}
+
+/* Modal Header */
+.modal-head {
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--smoke);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: var(--white);
+  z-index: 1;
+}
+
+.modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  color: var(--ink);
+}
+
+.modal-close {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--r-sm);
+  background: transparent;
+  border: 1px solid var(--smoke);
+  color: var(--ash);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-size: 16px;
+}
+
+.modal-close:hover {
+  background: var(--cloud);
+  color: var(--ink);
+}
+
+/* Modal Body */
+.modal-body {
+  padding: 22px;
+}
+
+/* Modal Footer */
+.modal-foot {
+  padding: 14px 22px;
+  border-top: 1px solid var(--smoke);
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* Confirmation Dialog */
+.confirm-box {
+  background: var(--white);
+  border-radius: var(--r-lg);
+  width: 100%;
+  max-width: 380px;
+  padding: 26px;
+  box-shadow: 0 20px 60px rgba(8, 21, 58, 0.2);
+  text-align: center;
+}
+
+.confirm-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  margin: 0 auto 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.confirm-icon.warn {
+  background: #FEF2F2;
+  color: var(--crimson);
+}
+
+.confirm-icon.info {
+  background: var(--frost);
+  color: var(--blue-main);
+}
+
+.confirm-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  color: var(--ink);
+  margin-bottom: 7px;
+}
+
+.confirm-msg {
+  font-size: 12.5px;
+  color: var(--ash);
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+
+.confirm-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}

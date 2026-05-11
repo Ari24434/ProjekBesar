@@ -1,0 +1,76 @@
+/* ==================================================
+   BADGE COMPONENTS
+   ================================================== */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+
+/* Status Badges */
+.badge-active {
+  background: #ECFDF5;
+  color: #065F46;
+}
+
+.badge-inactive {
+  background: var(--smoke);
+  color: var(--slate);
+}
+
+.badge-ongoing {
+  background: #FFFBEB;
+  color: #92400E;
+}
+
+.badge-done {
+  background: #ECFDF5;
+  color: #065F46;
+}
+
+.badge-pending {
+  background: #EFF6FF;
+  color: var(--blue-mid);
+}
+
+.badge-draft {
+  background: var(--smoke);
+  color: var(--slate);
+}
+
+/* Result Badges */
+.badge-pass {
+  background: #ECFDF5;
+  color: #065F46;
+}
+
+.badge-fail {
+  background: #FEF2F2;
+  color: #991B1B;
+}
+
+.badge-new {
+  background: var(--frost);
+  color: var(--blue-main);
+}
+
+/* Category Badges */
+.badge-twk {
+  background: var(--frost);
+  color: var(--blue-main);
+}
+
+.badge-tiu {
+  background: #F0FDF4;
+  color: #166534;
+}
+
+.badge-tkp {
+  background: #FFFBEB;
+  color: #92400E;
+}
