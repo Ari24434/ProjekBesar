@@ -1,0 +1,47 @@
+<?php
+function ABeranda(){
+    $title = "OC Tryout - Dashboard Admin";
+    $topbarTitle = "Dashboard Admin";
+    $active_menu = 'beranda';
+    $topbar = BASE_PATH . "/app/Tampilan/Widget/dashboard/topbar.php";
+    $content = BASE_PATH . "/app/Tampilan/Halaman/dashboard/beranda-admin.php";
+    include BASE_PATH . "/app/Tampilan/Layout/dashboard-layout.php";
+}
+
+function AKelolaTryout(){
+    $title = "OC Tryout - Kelola Tryout";
+    $topbarTitle = "Kelola Tryout";
+    $active_menu = 'kelola-tryout';
+    $topbar = BASE_PATH . "/app/Tampilan/Widget/dashboard/topbar.php";
+    $content = BASE_PATH . "/app/Tampilan/Halaman/dashboard/kelola-tryout-admin.php";
+    include BASE_PATH . "/app/Tampilan/Layout/dashboard-layout.php";
+}
+
+function AKelolaSoal(){
+    $title = "OC Tryout - Kelola Soal";
+    $topbarTitle = "Kelola Soal";
+    $active_menu = 'kelola-soal';
+    $topbar = BASE_PATH . "/app/Tampilan/Widget/dashboard/topbar.php";
+    $content = BASE_PATH . "/app/Tampilan/Halaman/dashboard/kelola-soal-admin.php";
+    include BASE_PATH . "/app/Tampilan/Layout/dashboard-layout.php";
+}
+
+function AKelolaPeserta(){
+    $title = "OC Tryout - Kelola Peserta";
+    $topbarTitle = "Kelola Peserta";
+    $active_menu = 'kelola-peserta';
+    $topbar = BASE_PATH . "/app/Tampilan/Widget/dashboard/topbar.php";
+    $content = BASE_PATH . "/app/Tampilan/Halaman/dashboard/kelola-peserta-admin.php";
+    include BASE_PATH . "/app/Tampilan/Layout/dashboard-layout.php";
+}
+
+function AAnalisis(){
+    $title = "OC Tryout - Analisis";
+    $topbarTitle = "Analisis";
+    $active_menu = 'analisis';
+    $topbar = BASE_PATH . "/app/Tampilan/Widget/dashboard/topbar.php";
+    $content = BASE_PATH . "/app/Tampilan/Halaman/dashboard/analisis-admin.php";
+    include BASE_PATH . "/app/Tampilan/Layout/dashboard-layout.php";
+}
+
+?>

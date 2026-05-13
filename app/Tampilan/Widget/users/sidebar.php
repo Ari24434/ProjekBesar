@@ -9,26 +9,16 @@
   <div class="sb-divider"></div>
   <nav class="sb-nav">
     <div class="sb-section-label">Menu Utama</div>
-    <div class="nav-item active" onclick="nav('dashboard')">
-      <div class="nav-icon"><i class="bi bi-grid-fill"></i></div> Dashboard
-    </div>
-    <div class="nav-item" onclick="nav('tryout')">
-      <div class="nav-icon"><i class="bi bi-journal-text"></i></div> Ikuti Tryout
-      <span class="nav-badge">3</span>
-    </div>
-    <div class="nav-item" onclick="nav('riwayat')">
-      <div class="nav-icon"><i class="bi bi-clock-history"></i></div> Riwayat
-    </div>
-    <div class="nav-item" onclick="nav('analisis')">
-      <div class="nav-icon"><i class="bi bi-bar-chart-line-fill"></i></div> Analisis
-    </div>
-    <div class="sb-section-label" style="margin-top:8px;">Akun</div>
-    <div class="nav-item" onclick="nav('profil')">
-      <div class="nav-icon"><i class="bi bi-person-fill"></i></div> Profil Saya
-    </div>
-    <div class="nav-item danger" onclick="konfirmKeluar()">
-      <div class="nav-icon"><i class="bi bi-box-arrow-left"></i></div> Keluar
-    </div>
+      <?php foreach ($nav_items as $key => $item): ?>
+      <a href="<?= BASE_URL . '/' . $item['url'] ?>" 
+          class="nav-item <?= $active_menu === $key ? 'active' : '' ?>">
+          <div class="nav-icon"><i class="bi <?= $item['icon'] ?>"></i></div>
+          <?= $item['label'] ?>
+          <?php if ($item['badge']): ?>
+          <span class="nav-badge"><?= $item['badge'] ?></span>
+          <?php endif; ?>
+      </a>
+      <?php endforeach; ?>
   </nav>
   <div class="sb-footer">
     <div class="sb-user-card">

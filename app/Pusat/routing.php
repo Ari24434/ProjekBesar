@@ -16,7 +16,7 @@ function request($uri, $method) {
 
     if (!$callback) {
         http_response_code(404);
-        echo "404 Not Found";
+        echo "Lagi eror mas";
         return;
     }
 
