@@ -57,23 +57,71 @@
   }
 }
 
-@keyframes floatBadge {
-  from {
+/* Additional animations for About page */
+@keyframes floatY {
+  0%,
+  100% {
     transform: translateY(0);
   }
-  to {
-    transform: translateY(-7px);
+  50% {
+    transform: translateY(-10px);
   }
 }
 
-@keyframes toastIn {
+@keyframes counterUp {
   from {
     opacity: 0;
-    transform: translateX(20px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes drawLine {
+  from {
+    stroke-dashoffset: 400;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(45, 114, 217, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 14px rgba(45, 114, 217, 0);
+  }
+}
+
+@keyframes marqueeScroll {
+  from {
     transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes orbFloat {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(20px, -30px) scale(1.06);
   }
 }
 

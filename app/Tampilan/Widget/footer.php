@@ -19,7 +19,7 @@
       </div>
       <div class="col-6 col-md-4 col-lg-2">
         <div class="foot-head">Informasi</div>
-        <a href="#" class="foot-link">Tentang Kami</a>
+        <a href="<?= BASE_URL ?>/Tentang" class="foot-link">Tentang Kami</a>
         <a href="#" class="foot-link">FAQ</a>
         <a href="#testimoni" class="foot-link">Testimoni</a>
       </div>

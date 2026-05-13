@@ -1,5 +1,5 @@
 <nav class="navbar-oca navbar navbar-expand-lg" id="mainNav">
-  <div class="container">
+  <div class="container-fluid px-5">
     <a class="navbar-brand d-flex align-items-center gap-2" href="#">
       <div class="brand-icon"><i class="bi bi-mortarboard-fill text-white" style="font-size:.9rem;"></i></div>
       <span class="brand-text">Oman's <span>Club</span> Academy</span>

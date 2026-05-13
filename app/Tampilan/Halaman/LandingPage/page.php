@@ -31,31 +31,7 @@
         </div>
       </div>
       <div class="col-lg-6 d-flex justify-content-center justify-content-lg-end">
-        <div class="hero-mockup-wrap" style="width:100%;max-width:410px;">
-          <div class="float-badge fb-score"><i class="bi bi-patch-check-fill"></i> Lulus SKD! 355 poin</div>
-          <div class="float-badge fb-rank"><i class="bi bi-trophy-fill"></i> Peringkat #2 dari 60</div>
-          <div class="mockup-card">
-            <div class="mock-header">
-              <div class="mock-dots"><span></span><span></span><span></span></div>
-              <div class="mock-urlbar">tryout.omansclub.id/ujian/sesi-3</div>
-            </div>
-            <div class="mock-q">
-              <div class="mock-q-lbl">TWK · Soal 7 dari 35</div>
-              <div class="mock-q-txt">Nilai Pancasila yang mencerminkan persatuan bangsa dalam kehidupan sehari-hari di tengah keberagaman adalah...</div>
-              <div class="mock-opts">
-                <div class="mock-opt"><div class="opt-circ">A</div> Mengutamakan kepentingan kelompok</div>
-                <div class="mock-opt sel"><div class="opt-circ"><i class="bi bi-check2" style="font-size:.6rem;"></i></div> Gotong royong tanpa memandang suku</div>
-                <div class="mock-opt"><div class="opt-circ">C</div> Bersaing antar daerah demi kemajuan</div>
-                <div class="mock-opt"><div class="opt-circ">D</div> Memprioritaskan kepentingan pribadi</div>
-              </div>
-            </div>
-            <div class="mock-footer">
-              <div class="mock-timer"><i class="bi bi-clock-fill" style="font-size:.78rem;"></i> 82:14</div>
-              <div class="mock-prog-wrap"><div class="mock-prog-fill"></div></div>
-              <div class="mock-qcount">62 / 110</div>
-            </div>
-          </div>
-        </div>
+        <img src="<?= BASE_URL?>/LogoOc.png" alt="Hero Image" class="hero-img">
       </div>
     </div>
   </div>
@@ -296,7 +272,6 @@
         <p class="cta-sub mx-auto">Bergabung bersama puluhan peserta Oman's Club Academy yang sudah berlatih menggunakan platform tryout CPNS kami.</p>
         <div class="d-flex justify-content-center gap-3 flex-wrap">
           <a href="https://www.instagram.com/omansclub" target="_blank" class="btn btn-cta"><i class="bi bi-rocket-takeoff-fill me-2"></i>Daftar Sekarang</a>
-          <a href="login.html" class="btn" style="background:transparent;border:1.5px solid rgba(255,255,255,.38);color:var(--white);padding:.85rem 2rem;border-radius:50px;font-weight:600;font-size:.93rem;font-family:'Plus Jakarta Sans',sans-serif;transition:all .25s;">Sudah Punya Akun</a>
         </div>
       </div>
     </div>
