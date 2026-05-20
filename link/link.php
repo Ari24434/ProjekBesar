@@ -15,4 +15,7 @@ get('/dashboard/kelola-tryout', 'AKelolaTryout');
 get('/dashboard/kelola-soal', 'AKelolaSoal');
 get('/dashboard/kelola-peserta', 'AKelolaPeserta');
 get('/dashboard/analisis', 'AAnalisis');
+get('/dashboard/nilai-hasil', 'ANilaiHasil');
+get('/dashboard/laporan-rekap', 'ALaporanRekap');
+get('/dashboard/pengaturan', 'APengaturan');
 ?>

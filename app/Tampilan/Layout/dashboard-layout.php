@@ -14,27 +14,27 @@
         $nav_items = [
             // Menu Utama
             'dashboard' => [
-                'url' => 'admin/dashboard',
+                'url' => 'dashboard/beranda',
                 'icon' => 'bi-grid-fill',
                 'label' => 'Dashboard',
                 'section' => 'utama',
                 'badge' => null
             ],
             'peserta' => [
-                'url' => 'admin/peserta',
+                'url' => 'dashboard/kelola-peserta',
                 'icon' => 'bi-people-fill',
                 'label' => 'Manajemen Peserta',
                 'section' => 'utama',
                 'badge' => $total_peserta ?? 60
             ],    'tryout' => [
-                'url' => 'admin/tryout',
+                'url' => 'dashboard/kelola-tryout',
                 'icon' => 'bi-journal-text',
                 'label' => 'Manajemen Tryout',
                 'section' => 'utama',
                 'badge' => null
             ],
             'soal' => [
-                'url' => 'admin/soal',
+                'url' => 'dashboard/kelola-soal',
                 'icon' => 'bi-question-circle-fill',
                 'label' => 'Bank Soal',
                 'section' => 'utama',
@@ -43,14 +43,14 @@
             ],
             // Laporan
             'nilai' => [
-                'url' => 'admin/nilai',
+                'url' => 'dashboard/nilai-hasil',
                 'icon' => 'bi-bar-chart-fill',
                 'label' => 'Nilai & Hasil',
                 'section' => 'laporan',
                 'badge' => null
             ],
             'laporan' => [
-                'url' => 'admin/laporan',
+                'url' => 'dashboard/laporan-rekap',
                 'icon' => 'bi-file-earmark-bar-graph-fill',
                 'label' => 'Laporan Rekap',
                 'section' => 'laporan',
@@ -58,7 +58,7 @@
             ],
             // Sistem
             'pengaturan' => [
-                'url' => 'admin/pengaturan',
+                'url' => 'dashboard/pengaturan',
                 'icon' => 'bi-gear-fill',
                 'label' => 'Pengaturan',
                 'section' => 'sistem',

@@ -8,7 +8,7 @@ require BASE_PATH . '/app/Pusat/routing.php';
 
 require BASE_PATH . '/app/helpers/url.php';
 
-require BASE_PATH . '/routes/router.php';
+require BASE_PATH . '/link/link.php';
 
 request($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
 

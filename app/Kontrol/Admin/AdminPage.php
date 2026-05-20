@@ -44,4 +44,31 @@ function AAnalisis(){
     include BASE_PATH . "/app/Tampilan/Layout/dashboard-layout.php";
 }
 
+function ANilaiHasil(){
+    $title = "OC Tryout - Nilai & Hasil";
+    $topbarTitle = "Nilai & Hasil";
+    $active_menu = 'nilai';
+    $topbar = BASE_PATH . "/app/Tampilan/Widget/dashboard/topbar.php";
+    $content = BASE_PATH . "/app/Tampilan/Halaman/dashboard/nilai-hasil-admin.php";
+    include BASE_PATH . "/app/Tampilan/Layout/dashboard-layout.php";
+}
+
+function ALaporanRekap(){
+    $title = "OC Tryout - Laporan Rekap";
+    $topbarTitle = "Laporan Rekap";
+    $active_menu = 'laporan';
+    $topbar = BASE_PATH . "/app/Tampilan/Widget/dashboard/topbar.php";
+    $content = BASE_PATH . "/app/Tampilan/Halaman/dashboard/laporan-rekap.php";
+    include BASE_PATH . "/app/Tampilan/Layout/dashboard-layout.php";
+}
+
+function APengaturan(){
+    $title = "OC Tryout - Pengaturan";
+    $topbarTitle = "Pengaturan";
+    $active_menu = 'pengaturan';
+    $topbar = BASE_PATH . "/app/Tampilan/Widget/dashboard/topbar.php";
+    $content = BASE_PATH . "/app/Tampilan/Halaman/dashboard/pengaturan-admin.php";
+    include BASE_PATH . "/app/Tampilan/Layout/dashboard-layout.php";
+}
+
 ?>

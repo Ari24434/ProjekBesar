@@ -20,15 +20,37 @@
             <span class="nav-badge <?= $item['badge_class'] ?? '' ?>"><?= $item['badge'] ?></span>
             <?php endif; ?>
         </a>
+        <?php elseif ($item['section'] === 'laporan'): ?>
+        <a href="<?= BASE_URL . '/' . $item['url'] ?>" 
+            class="nav-item <?= $active_menu === $key ? 'active' : '' ?>"
+            data-menu="<?= $key ?>">
+            <div class="nav-icon"><i class="bi <?= $item['icon'] ?>"></i></div>
+            <?= $item['label'] ?>
+            <?php if ($item['badge']): ?>
+            <span class="nav-badge <?= $item['badge_class'] ?? '' ?>"><?= $item['badge'] ?></span>
+            <?php endif; ?>
+        </a>
         <?php endif; ?>
     <?php endforeach; ?>
     <div class="sb-section-label" style="margin-top:8px;">Sistem</div>
-    <div class="nav-item" onclick="nav('pengaturan')">
-      <div class="nav-icon"><i class="bi bi-gear-fill"></i></div> Pengaturan
-    </div>
-    <div class="nav-item danger" onclick="konfirmKeluar()">
-      <div class="nav-icon"><i class="bi bi-box-arrow-left"></i></div> Keluar
-    </div>
+    <?php foreach ($nav_items as $key => $item): ?>
+        <?php if ($item['section'] === 'sistem'): ?>
+        <a href="<?= BASE_URL . '/' . $item['url'] ?>" 
+            class="nav-item <?= $active_menu === $key ? 'active' : '' ?>"
+            data-menu="<?= $key ?>">
+            <div class="nav-icon"><i class="bi <?= $item['icon'] ?>"></i></div>
+            <?= $item['label'] ?>
+            <?php if ($item['badge']): ?>
+            <span class="nav-badge <?= $item['badge_class'] ?? '' ?>"><?= $item['badge'] ?></span>
+            <?php endif; ?>
+        </a>
+        <?php endif; ?>
+    <?php endforeach; ?>
+    <a href="<?= BASE_URL ?>/login">
+      <div class="nav-item danger">
+        <div class="nav-icon"><i class="bi bi-box-arrow-left"></i></div> Keluar
+      </div>
+    </a>
   </nav>
   <div class="sb-footer">
     <div class="sb-user-card">
