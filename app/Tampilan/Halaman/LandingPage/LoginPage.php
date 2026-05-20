@@ -6,8 +6,10 @@
 
   <!-- Brand -->
   <div class="lp-brand">
-    <div class="lp-brand-icon"><i class="bi bi-mortarboard-fill text-white" style="font-size:.95rem;"></i></div>
+   <a class="d-flex gap-2 align-items-center" href="<?= BASE_URL ?>">
+     <div class="lp-brand-icon"><i class="bi bi-mortarboard-fill text-white" style="font-size:.95rem;"></i></div>
     <span class="lp-brand-text">Oman's <span>Club</span> Academy</span>
+   </a>
   </div>
 
   <!-- Center -->

@@ -16,7 +16,7 @@
               <span style="font-size:10.5px;background:var(--cloud);border:1px solid var(--smoke);color:var(--slate);padding:3px 8px;border-radius:var(--r-sm);"><i class="bi bi-list-ol" style="font-size:9px;"></i> 110 soal</span>
               <span style="font-size:10.5px;background:var(--cloud);border:1px solid var(--smoke);color:var(--slate);padding:3px 8px;border-radius:var(--r-sm);"><i class="bi bi-calendar3" style="font-size:9px;"></i> 15 Mei 2026</span>
             </div>
-            <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="nav('exam')"><i class="bi bi-play-circle-fill"></i> Mulai Tryout</button>
+            <a href="/user/soal-tryout" class="btn btn-primary" style="width:100%;justify-content:center;" onclick="startExam()"><i class="bi bi-play-circle-fill"></i> Mulai Tryout</a>
           </div>
         </div>
         <div class="card anim anim-d1" style="border-top:3px solid var(--emerald);">
@@ -33,7 +33,7 @@
               <div class="progress-bar"><div class="progress-fill" style="width:71%;background:var(--blue-main);"></div></div>
               <div style="font-size:10.5px;color:var(--ash);margin-top:4px;">71% dari nilai maksimal</div>
             </div>
-            <button class="btn btn-ghost" style="width:100%;justify-content:center;" onclick="nav('hasil')"><i class="bi bi-eye"></i> Lihat Hasil Detail</button>
+            <a href="/user/hasil-tryout" class="btn btn-ghost" style="width:100%;justify-content:center;" ><i class="bi bi-eye"></i> Lihat Hasil Detail</a>
           </div>
         </div>
         <div class="card anim anim-d2" style="border-top:3px solid var(--emerald);">
@@ -50,7 +50,7 @@
               <div class="progress-bar"><div class="progress-fill" style="width:68%;background:var(--blue-main);"></div></div>
               <div style="font-size:10.5px;color:var(--ash);margin-top:4px;">68% dari nilai maksimal</div>
             </div>
-            <button class="btn btn-ghost" style="width:100%;justify-content:center;" onclick="nav('hasil')"><i class="bi bi-eye"></i> Lihat Hasil Detail</button>
+            <a href="/user/hasil-tryout" class="btn btn-ghost" style="width:100%;justify-content:center;" ><i class="bi bi-eye"></i> Lihat Hasil Detail</a>
           </div>
         </div>
       </div>

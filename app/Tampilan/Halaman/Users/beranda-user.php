@@ -15,9 +15,9 @@
               <div class="wb-pill"><i class="bi bi-graph-up" style="color:#93C5FD;font-size:10px;"></i> +12 dari sesi sebelumnya</div>
             </div>
           </div>
-          <button class="btn btn-lg" onclick="nav('tryout')" style="background:rgba(255,255,255,.11);border:1.5px solid rgba(255,255,255,.2);color:#fff;flex-shrink:0;">
-            <i class="bi bi-play-circle-fill" style="color:#93C5FD;"></i> Mulai Tryout
-          </button>
+          <a href="/user/daftar-tryout" class="btn btn-lg" onclick="nav('tryout')" style="background:rgba(255,255,255,.11);border:1.5px solid rgba(255,255,255,.2);color:#fff;flex-shrink:0;">
+            <i class="bi bi-play-circle-fill" style="color:#93C5FD;"></i> Ikuti Tryout
+          </a>
         </div>
       </div>
 

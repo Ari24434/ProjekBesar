@@ -21,7 +21,7 @@
             'daftar-tryout' => [
                 'url' => 'user/daftar-tryout',
                 'icon' => 'bi-journal-text',
-                'label' => 'Ikuti Tryout',
+                'label' => 'Daftar Tryout',
                 'badge' => $tryout_tersedia ?? 3
             ],
             'riwayat' => [

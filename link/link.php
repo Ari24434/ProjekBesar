@@ -8,6 +8,8 @@ get('/', 'LPBeranda');
 get('/login', 'Login');
 get('/user/beranda', 'UBeranda');
 get('/user/daftar-tryout', 'UDTryout');
+get('/user/hasil-tryout', 'UHTryout');
+get('/user/soal-tryout', 'USTryout');
 get('/user/riwayat', 'URiwayat');
 get('/user/profil', 'UProfil');
 get('/dashboard/beranda', 'ABeranda');
