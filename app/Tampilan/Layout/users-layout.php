@@ -11,10 +11,48 @@
 </head>
 <body>
     <?php
-        include $navbar;
-        include $content;
-        include $footer;
+        $nav_items = [
+            'beranda' => [
+                'url' => 'user/beranda',
+                'icon' => 'bi-house-fill',
+                'label' => 'Beranda',
+                'badge' => null
+            ],
+            'daftar-tryout' => [
+                'url' => 'user/daftar-tryout',
+                'icon' => 'bi-journal-text',
+                'label' => 'Ikuti Tryout',
+                'badge' => $tryout_tersedia ?? 3
+            ],
+            'riwayat' => [
+                'url' => 'user/riwayat',
+                'icon' => 'bi-clock-history',
+                'label' => 'Riwayat',
+                'badge' => null
+            ],
+            'analisis' => [
+                'url' => 'user/analisis',
+                'icon' => 'bi-bar-chart-line-fill',
+                'label' => 'Analisis',
+                'badge' => null
+            ],
+            'profil' => [
+                'url' => 'user/profil',
+                'icon' => 'bi-person-fill',
+                'label' => 'Profil Saya',
+                'badge' => null
+            ]
+        ];
+        $active_menu = $active_menu ?? 'beranda';
+        include BASE_PATH . "/app/Tampilan/Widget/users/sidebar.php";
     ?>
+    <div class="main-wrap">
+        <?php
+            include $topbar;
+            include $content;
+
+        ?>
+    </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>

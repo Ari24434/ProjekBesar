@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TryoutCPNS — Oman's Club Academy</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet"/>
+  <style>
+    /* ══════════ DESIGN TOKENS ══════════ */
+    :root {
+      --navy:        #08153A;
+      --blue-dark:   #0D2149;
+      --blue-mid:    #1A3D7C;
+      --blue-main:   #1E54B7;
+      --blue-bright: #2D72D9;
+      --blue-light:  #5B8EF5;
+      --blue-pale:   #DAE5FD;
+      --blue-ghost:  #EBF2FE;
+      --frost:       #F0F5FF;
+      --white:       #FFFFFF;
+      --off-white:   #F7FAFF;
+      --ink:         #0F1729;
+      --slate:       #475569;
+      --ash:         #94A3B8;
+      --smoke:       #E2E8F5;
+      --gold:        #C8A84B;
+      --gold-light:  #F0D070;
+      --emerald:     #10B981;
+      --crimson:     #EF4444;
+      --r-lg: 16px; --r-md: 10px; --r-sm: 6px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--white);color:var(--ink);overflow-x:hidden;}
+
+    /* ══════════ NAVBAR ══════════ */
+    .navbar-oca{
+      background:rgba(8,21,58,.96);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(255,255,255,.07);
+      padding:.9rem 0;
+      position:sticky;top:0;z-index:1000;
+      transition:padding .3s,box-shadow .3s;
+    }
+    .navbar-oca.scrolled{padding:.55rem 0;box-shadow:0 4px 30px rgba(0,0,0,.3);}
+    .brand-text{
+      font-family:'Playfair Display',serif;
+      font-size:1.35rem;font-weight:700;color:var(--white);
+      letter-spacing:-.3px;
+    }
+    .brand-text span{color:var(--gold);}
+    .brand-icon{
+      width:34px;height:34px;border-radius:9px;
+      background:linear-gradient(135deg,var(--blue-main),var(--blue-bright));
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 4px 12px rgba(45,114,217,.4);
+    }
+    .nav-link-c{color:rgba(255,255,255,.72)!important;font-size:.875rem;font-weight:500;padding:.45rem .9rem!important;border-radius:8px;transition:all .2s;}
+    .nav-link-c:hover{color:var(--white)!important;background:rgba(255,255,255,.07);}
+    .btn-nav-masuk{
+      background:transparent;border:1.5px solid rgba(255,255,255,.28);
+      color:var(--white);font-size:.845rem;font-weight:600;
+      padding:.42rem 1.2rem;border-radius:50px;transition:all .25s;
+    }
+    .btn-nav-masuk:hover{background:var(--blue-bright);border-color:var(--blue-bright);color:var(--white);}
+    .btn-nav-daftar{
+      background:var(--gold);border:none;color:var(--navy);
+      font-size:.845rem;font-weight:700;
+      padding:.42rem 1.2rem;border-radius:50px;transition:all .25s;
+    }
+    .btn-nav-daftar:hover{background:var(--gold-light);color:var(--navy);}
+
+    /* ══════════ HERO ══════════ */
+    .hero{
+      background:linear-gradient(145deg,var(--navy) 0%,var(--blue-dark) 40%,var(--blue-mid) 100%);
+      min-height:100vh;display:flex;align-items:center;
+      position:relative;overflow:hidden;padding:5rem 0 4rem;
+    }
+    .hero-grid{
+      position:absolute;inset:0;
+      background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+      background-size:58px 58px;pointer-events:none;
+    }
+    .hero-blob{position:absolute;border-radius:50%;pointer-events:none;}
+    .hero-blob.b1{width:700px;height:700px;top:-200px;right:-150px;background:radial-gradient(circle,rgba(45,114,217,.2) 0%,transparent 70%);}
+    .hero-blob.b2{width:500px;height:500px;bottom:-160px;left:-120px;background:radial-gradient(circle,rgba(200,168,75,.12) 0%,transparent 70%);}
+
+    .hero-badge{
+      display:inline-flex;align-items:center;gap:.5rem;
+      background:rgba(200,168,75,.15);border:1px solid rgba(200,168,75,.38);
+      color:var(--gold-light);font-size:.75rem;font-weight:600;
+      padding:.38rem 1rem;border-radius:50px;letter-spacing:.5px;
+      text-transform:uppercase;margin-bottom:1.5rem;
+      animation:fadeInDown .7s ease both;
+    }
+    .hero-title{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(2.4rem,5vw,4rem);font-weight:900;
+      color:var(--white);line-height:1.1;margin-bottom:1.4rem;
+      animation:fadeInUp .7s .1s ease both;
+    }
+    .hero-title .acc{color:var(--gold);}
+    .hero-sub{
+      font-size:1rem;color:rgba(255,255,255,.68);line-height:1.8;
+      max-width:510px;margin-bottom:2.2rem;
+      animation:fadeInUp .7s .2s ease both;
+    }
+    .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeInUp .7s .3s ease both;}
+    .btn-hero-primary{
+      background:var(--blue-bright);color:var(--white);border:none;
+      padding:.82rem 1.9rem;border-radius:50px;font-weight:700;font-size:.93rem;
+      font-family:'Plus Jakarta Sans',sans-serif;
+      transition:all .25s;box-shadow:0 8px 24px rgba(45,114,217,.38);
+    }
+    .btn-hero-primary:hover{background:var(--blue-light);transform:translateY(-2px);box-shadow:0 12px 30px rgba(45,114,217,.48);color:var(--white);}
+    .btn-hero-outline{
+      background:transparent;border:1.5px solid rgba(255,255,255,.32);
+      color:var(--white);padding:.82rem 1.9rem;border-radius:50px;
+      font-weight:600;font-size:.93rem;font-family:'Plus Jakarta Sans',sans-serif;
+      transition:all .25s;
+    }
+    .btn-hero-outline:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.6);color:var(--white);}
+
+    .hero-stats{display:flex;gap:2.2rem;margin-top:2.8rem;animation:fadeInUp .7s .44s ease both;flex-wrap:wrap;}
+    .hero-stat-num{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;color:var(--white);line-height:1;}
+    .hero-stat-lbl{font-size:.76rem;color:rgba(255,255,255,.5);font-weight:500;margin-top:.2rem;}
+    .stat-sep{width:1px;background:rgba(255,255,255,.14);height:40px;align-self:center;}
+
+    /* Mockup card */
+    .hero-mockup-wrap{animation:floatUp .9s .2s ease both;position:relative;}
+    .mockup-card{
+      background:rgba(255,255,255,.07);backdrop-filter:blur(18px);
+      border:1px solid rgba(255,255,255,.11);border-radius:20px;padding:1.6rem;
+    }
+    .mock-header{display:flex;align-items:center;gap:.6rem;margin-bottom:1.2rem;padding-bottom:.9rem;border-bottom:1px solid rgba(255,255,255,.09);}
+    .mock-dots span{display:inline-block;width:10px;height:10px;border-radius:50%;}
+    .mock-dots span:nth-child(1){background:#FF6B6B;}
+    .mock-dots span:nth-child(2){background:#FFD166;}
+    .mock-dots span:nth-child(3){background:#06D6A0;}
+    .mock-urlbar{background:rgba(255,255,255,.06);border-radius:6px;padding:.28rem .85rem;font-size:.73rem;color:rgba(255,255,255,.45);flex:1;}
+    .mock-q{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1rem 1.1rem;margin-bottom:.85rem;}
+    .mock-q-lbl{font-size:.67rem;color:var(--blue-pale);font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:.42rem;}
+    .mock-q-txt{font-size:.8rem;color:rgba(255,255,255,.82);line-height:1.5;}
+    .mock-opts{display:flex;flex-direction:column;gap:.45rem;margin-top:.75rem;}
+    .mock-opt{display:flex;align-items:center;gap:.65rem;padding:.5rem .85rem;border-radius:8px;font-size:.78rem;color:rgba(255,255,255,.65);border:1px solid rgba(255,255,255,.08);transition:all .2s;}
+    .mock-opt.sel{background:rgba(45,114,217,.28);border-color:var(--blue-bright);color:var(--white);}
+    .opt-circ{width:17px;height:17px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:700;flex-shrink:0;}
+    .mock-opt.sel .opt-circ{background:var(--blue-bright);border-color:var(--blue-bright);}
+    .mock-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1rem;padding-top:.85rem;border-top:1px solid rgba(255,255,255,.08);}
+    .mock-timer{display:flex;align-items:center;gap:.38rem;font-size:.8rem;font-weight:700;color:var(--gold-light);}
+    .mock-prog-wrap{flex:1;height:4px;background:rgba(255,255,255,.09);border-radius:2px;margin:0 .85rem;}
+    .mock-prog-fill{height:100%;width:62%;background:var(--blue-bright);border-radius:2px;}
+    .mock-qcount{font-size:.73rem;color:rgba(255,255,255,.45);}
+    .float-badge{
+      position:absolute;border-radius:12px;padding:.55rem .9rem;
+      display:flex;align-items:center;gap:.45rem;font-size:.76rem;font-weight:600;
+      backdrop-filter:blur(10px);
+    }
+    .fb-score{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.28);color:#06D6A0;top:-16px;right:20px;animation:floatBadge 3s ease-in-out infinite alternate;}
+    .fb-rank{background:rgba(200,168,75,.14);border:1px solid rgba(200,168,75,.3);color:var(--gold-light);bottom:-16px;left:14px;animation:floatBadge 3s 1s ease-in-out infinite alternate;}
+
+    /* ══════════ STATS BAND ══════════ */
+    .stats-band{background:var(--navy);padding:3.2rem 0;}
+    .s-num{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:700;color:var(--white);line-height:1;}
+    .s-num span{color:var(--gold);}
+    .s-lbl{font-size:.8rem;color:rgba(255,255,255,.45);font-weight:500;margin-top:.35rem;}
+    .s-sep{width:1px;height:56px;background:rgba(255,255,255,.1);align-self:center;}
+
+    /* ══════════ SECTION COMMONS ══════════ */
+    .sec-chip{
+      display:inline-block;background:var(--blue-ghost);color:var(--blue-main);
+      font-size:.71rem;font-weight:700;padding:.32rem .85rem;border-radius:50px;
+      letter-spacing:.5px;text-transform:uppercase;margin-bottom:.85rem;
+    }
+    .sec-chip.light{background:rgba(255,255,255,.1);color:var(--blue-pale);}
+    .sec-title{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3.2vw,2.5rem);font-weight:700;color:var(--ink);line-height:1.2;}
+    .sec-title .acc{color:var(--blue-main);}
+    .sec-title.light{color:var(--white);}
+    .sec-title.light .acc{color:var(--gold);}
+    .sec-sub{font-size:.96rem;color:var(--ash);line-height:1.75;max-width:540px;}
+    .sec-sub.light{color:rgba(255,255,255,.52);}
+
+    /* ══════════ FEATURES ══════════ */
+    .features-sec{padding:5.5rem 0;background:var(--off-white);}
+    .feat-card{
+      background:var(--white);border:1px solid var(--smoke);border-radius:var(--r-lg);
+      padding:1.8rem;height:100%;transition:all .3s;position:relative;overflow:hidden;
+    }
+    .feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue-main),var(--blue-bright));opacity:0;transition:opacity .3s;}
+    .feat-card:hover{box-shadow:0 10px 36px rgba(30,84,183,.09);transform:translateY(-4px);border-color:var(--blue-pale);}
+    .feat-card:hover::before{opacity:1;}
+    .feat-icon{width:50px;height:50px;border-radius:13px;background:var(--blue-ghost);display:flex;align-items:center;justify-content:center;font-size:1.35rem;color:var(--blue-main);margin-bottom:1.1rem;}
+    .feat-title{font-size:.97rem;font-weight:700;color:var(--ink);margin-bottom:.45rem;}
+    .feat-desc{font-size:.855rem;color:var(--ash);line-height:1.7;margin:0;}
+
+    /* ══════════ MATERI ══════════ */
+    .materi-sec{padding:5.5rem 0;}
+    .mat-card{border-radius:var(--r-lg);padding:1.9rem 1.9rem 1.9rem 2.1rem;height:100%;position:relative;overflow:hidden;border:1px solid transparent;transition:all .3s;}
+    .mat-card.twk{background:linear-gradient(135deg,#EBF2FE 0%,#D6E8FF 100%);border-color:#B8D4F5;}
+    .mat-card.tiu{background:linear-gradient(135deg,#EDF9F0 0%,#D4F2DB 100%);border-color:#B5E6C0;}
+    .mat-card.tkp{background:linear-gradient(135deg,#FFF8EA 0%,#FDEFC8 100%);border-color:#F5DFA0;}
+    .mat-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.07);}
+    .mat-tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:.28rem .75rem;border-radius:50px;margin-bottom:.85rem;}
+    .mat-card.twk .mat-tag{background:var(--blue-main);color:var(--white);}
+    .mat-card.tiu .mat-tag{background:#198754;color:var(--white);}
+    .mat-card.tkp .mat-tag{background:var(--gold);color:var(--navy);}
+    .mat-title{font-size:1.05rem;font-weight:700;color:var(--ink);margin-bottom:.45rem;}
+    .mat-desc{font-size:.84rem;color:#4A5568;line-height:1.7;}
+    .mat-num{position:absolute;right:1.4rem;top:1.4rem;font-size:2.4rem;font-weight:800;opacity:.09;font-family:'Playfair Display',serif;color:var(--ink);}
+
+    /* ══════════ CARA KERJA ══════════ */
+    .cara-sec{padding:5.5rem 0;background:var(--off-white);}
+    .step-item{display:flex;gap:1.3rem;align-items:flex-start;}
+    .step-num{flex-shrink:0;width:42px;height:42px;border-radius:50%;background:var(--blue-main);color:var(--white);font-weight:800;font-size:.88rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(30,84,183,.32);}
+    .step-connector{width:2px;height:28px;background:linear-gradient(to bottom,var(--blue-main),var(--blue-pale));margin-left:20px;}
+    .step-body{padding-bottom:1.8rem;}
+    .step-title{font-size:.97rem;font-weight:700;color:var(--ink);margin-bottom:.32rem;}
+    .step-desc{font-size:.855rem;color:var(--ash);line-height:1.7;margin:0;}
+
+    /* ══════════ TESTIMONIAL ══════════ */
+    .testi-sec{padding:5.5rem 0;background:var(--navy);}
+    .testi-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);padding:1.7rem;height:100%;transition:all .3s;}
+    .testi-card:hover{background:rgba(255,255,255,.09);}
+    .testi-stars{color:var(--gold);font-size:.83rem;margin-bottom:.75rem;}
+    .testi-txt{font-size:.875rem;color:rgba(255,255,255,.78);line-height:1.72;font-style:italic;margin-bottom:1.1rem;}
+    .testi-av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--blue-main),var(--blue-bright));display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--white);font-size:.88rem;}
+    .testi-name{font-size:.855rem;font-weight:600;color:var(--white);}
+    .testi-role{font-size:.73rem;color:rgba(255,255,255,.4);margin-top:.1rem;}
+
+    /* ══════════ CTA ══════════ */
+    .cta-sec{
+      padding:5.5rem 0;
+      background:linear-gradient(135deg,var(--blue-main) 0%,var(--blue-dark) 100%);
+      position:relative;overflow:hidden;
+    }
+    .cta-blob{position:absolute;border-radius:50%;background:rgba(255,255,255,.05);pointer-events:none;}
+    .cta-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.8vw,2.85rem);font-weight:700;color:var(--white);margin-bottom:.9rem;}
+    .cta-sub{font-size:.97rem;color:rgba(255,255,255,.72);max-width:480px;line-height:1.75;margin-bottom:1.9rem;}
+    .btn-cta{background:var(--white);color:var(--blue-main);font-weight:700;padding:.85rem 2.1rem;border-radius:50px;border:none;font-size:.93rem;font-family:'Plus Jakarta Sans',sans-serif;transition:all .25s;box-shadow:0 8px 24px rgba(0,0,0,.18);}
+    .btn-cta:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(0,0,0,.24);color:var(--blue-main);}
+
+    /* ══════════ FOOTER ══════════ */
+    footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding:3.8rem 0 1.8rem;}
+    .foot-brand{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;color:var(--white);}
+    .foot-brand span{color:var(--gold);}
+    .foot-tag{font-size:.82rem;color:rgba(255,255,255,.4);margin-top:.38rem;}
+    .foot-head{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:rgba(255,255,255,.35);margin-bottom:.9rem;}
+    .foot-link{display:block;font-size:.84rem;color:rgba(255,255,255,.55);text-decoration:none;margin-bottom:.45rem;transition:color .2s;}
+    .foot-link:hover{color:var(--white);}
+    .foot-copy{font-size:.78rem;color:rgba(255,255,255,.25);}
+    .foot-social a{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.45);text-decoration:none;font-size:.88rem;transition:all .2s;margin-right:.45rem;}
+    .foot-social a:hover{border-color:var(--blue-bright);color:var(--white);background:rgba(45,114,217,.14);}
+
+    /* ══════════ ANIMATIONS ══════════ */
+    @keyframes fadeInDown{from{opacity:0;transform:translateY(-18px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes floatUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes floatBadge{from{transform:translateY(0);}to{transform:translateY(-7px);}}
+
+    /* ══════════ RESPONSIVE ══════════ */
+    @media(max-width:768px){
+      .hero-stats{gap:1.4rem;}
+      .float-badge{display:none;}
+      .hero{padding:4rem 0 3rem;}
+    }
+    @media(max-width:480px){
+      .hero-title{font-size:2rem;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ NAVBAR ══════════ -->
+<nav class="navbar-oca navbar navbar-expand-lg" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+      <div class="brand-icon"><i class="bi bi-mortarboard-fill text-white" style="font-size:.9rem;"></i></div>
+      <span class="brand-text">Oman's <span>Club</span> Academy</span>
+    </a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" style="color:rgba(255,255,255,.7);">
+      <i class="bi bi-list fs-4"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav mx-auto gap-1">
+        <li class="nav-item"><a class="nav-link-c" href="#beranda">Beranda</a></li>
+        <li class="nav-item"><a class="nav-link-c" href="#fitur">Fitur</a></li>
+        <li class="nav-item"><a class="nav-link-c" href="#materi">Materi SKD</a></li>
+        <li class="nav-item"><a class="nav-link-c" href="#cara">Cara Kerja</a></li>
+        <li class="nav-item"><a class="nav-link-c" href="#testimoni">Testimoni</a></li>
+        <li class="nav-item"><a class="nav-link-c" href="#kontak">Kontak</a></li>
+      </ul>
+      <div class="d-flex gap-2 mt-3 mt-lg-0">
+        <a href="login.html" class="btn btn-nav-masuk">Masuk</a>
+        <a href="https://www.instagram.com/omansclub" target="_blank" class="btn btn-nav-daftar">Daftar Gratis</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero" id="beranda">
+  <div class="hero-grid"></div>
+  <div class="hero-blob b1"></div>
+  <div class="hero-blob b2"></div>
+  <div class="container">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-6">
+        <div class="hero-badge"><i class="bi bi-shield-check-fill"></i> Platform Tryout CPNS Terpercaya</div>
+        <h1 class="hero-title">Raih Kelulusan<br/><span class="acc">CPNS</span> Impianmu<br/>Bersama Kami</h1>
+        <p class="hero-sub">Simulasikan ujian SKD CPNS dengan sistem CAT berbasis web yang realistis, penilaian otomatis, dan analisis hasil lengkap. Dirancang khusus untuk peserta Oman's Club Academy.</p>
+        <div class="hero-cta">
+          <a href="login.html" class="btn btn-hero-primary"><i class="bi bi-play-circle-fill me-1"></i> Mulai Tryout</a>
+          <a href="#cara" class="btn btn-hero-outline">Cara Kerja <i class="bi bi-arrow-down ms-1"></i></a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-num">60<span style="color:var(--gold);">+</span></div>
+            <div class="hero-stat-lbl">Peserta Aktif</div>
+          </div>
+          <div class="stat-sep"></div>
+          <div>
+            <div class="hero-stat-num">1.000<span style="color:var(--gold);">+</span></div>
+            <div class="hero-stat-lbl">Soal Tersedia</div>
+          </div>
+          <div class="stat-sep"></div>
+          <div>
+            <div class="hero-stat-num">75<span style="color:var(--gold);">%</span></div>
+            <div class="hero-stat-lbl">Tingkat Kelulusan</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 d-flex justify-content-center justify-content-lg-end">
+        <div class="hero-mockup-wrap" style="width:100%;max-width:410px;">
+          <div class="float-badge fb-score"><i class="bi bi-patch-check-fill"></i> Lulus SKD! 355 poin</div>
+          <div class="float-badge fb-rank"><i class="bi bi-trophy-fill"></i> Peringkat #2 dari 60</div>
+          <div class="mockup-card">
+            <div class="mock-header">
+              <div class="mock-dots"><span></span><span></span><span></span></div>
+              <div class="mock-urlbar">tryout.omansclub.id/ujian/sesi-3</div>
+            </div>
+            <div class="mock-q">
+              <div class="mock-q-lbl">TWK · Soal 7 dari 35</div>
+              <div class="mock-q-txt">Nilai Pancasila yang mencerminkan persatuan bangsa dalam kehidupan sehari-hari di tengah keberagaman adalah...</div>
+              <div class="mock-opts">
+                <div class="mock-opt"><div class="opt-circ">A</div> Mengutamakan kepentingan kelompok</div>
+                <div class="mock-opt sel"><div class="opt-circ"><i class="bi bi-check2" style="font-size:.6rem;"></i></div> Gotong royong tanpa memandang suku</div>
+                <div class="mock-opt"><div class="opt-circ">C</div> Bersaing antar daerah demi kemajuan</div>
+                <div class="mock-opt"><div class="opt-circ">D</div> Memprioritaskan kepentingan pribadi</div>
+              </div>
+            </div>
+            <div class="mock-footer">
+              <div class="mock-timer"><i class="bi bi-clock-fill" style="font-size:.78rem;"></i> 82:14</div>
+              <div class="mock-prog-wrap"><div class="mock-prog-fill"></div></div>
+              <div class="mock-qcount">62 / 110</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ STATS BAND ══════════ -->
+<section class="stats-band">
+  <div class="container">
+    <div class="row justify-content-center align-items-center gy-4 text-center">
+      <div class="col-6 col-md-3">
+        <div class="s-num" id="cnt-60">60<span>+</span></div>
+        <div class="s-lbl">Peserta per Angkatan</div>
+      </div>
+      <div class="col-1 d-none d-md-flex justify-content-center"><div class="s-sep"></div></div>
+      <div class="col-6 col-md-3">
+        <div class="s-num" id="cnt-82">82<span>%</span></div>
+        <div class="s-lbl">Lolos Seleksi SKD</div>
+      </div>
+      <div class="col-1 d-none d-md-flex justify-content-center"><div class="s-sep"></div></div>
+      <div class="col-6 col-md-2">
+        <div class="s-num" id="cnt-29">29<span>+</span></div>
+        <div class="s-lbl">Peserta Jadi PNS</div>
+      </div>
+      <div class="col-1 d-none d-md-flex justify-content-center"><div class="s-sep"></div></div>
+      <div class="col-6 col-md-2">
+        <div class="s-num">100<span>%</span></div>
+        <div class="s-lbl">Penilaian Otomatis</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FITUR ══════════ -->
+<section class="features-sec" id="fitur">
+  <div class="container">
+    <div class="row justify-content-center mb-5 text-center">
+      <div class="col-lg-7">
+        <div class="sec-chip">Fitur Unggulan</div>
+        <h2 class="sec-title mb-3">Semua yang Kamu Butuhkan untuk <span class="acc">Lolos CPNS</span></h2>
+        <p class="sec-sub mx-auto">Platform terintegrasi dengan fitur-fitur yang dirancang khusus untuk simulasi SKD CPNS secara realistis.</p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-4">
+        <div class="feat-card">
+          <div class="feat-icon"><i class="bi bi-display"></i></div>
+          <div class="feat-title">Simulasi CAT Realistis</div>
+          <p class="feat-desc">Tampilan dan mekanisme menyerupai sistem CAT BKN. Timer otomatis, navigasi soal, pengalaman mendekati tes asli.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <div class="feat-card">
+          <div class="feat-icon"><i class="bi bi-lightning-charge"></i></div>
+          <div class="feat-title">Penilaian Otomatis</div>
+          <p class="feat-desc">Nilai keluar instan setelah tryout selesai. Transparan dan akurat sesuai standar passing grade SKD BKN.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <div class="feat-card">
+          <div class="feat-icon"><i class="bi bi-bar-chart-line"></i></div>
+          <div class="feat-title">Analisis Hasil Lengkap</div>
+          <p class="feat-desc">Lihat performa per kategori TWK, TIU, TKP, grafik perkembangan, dan perbandingan nilai secara real-time.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <div class="feat-card">
+          <div class="feat-icon"><i class="bi bi-calendar3"></i></div>
+          <div class="feat-title">Jadwal Tryout Teratur</div>
+          <p class="feat-desc">Admin mengatur jadwal dengan mudah. Peserta dapat mengakses sesi sesuai waktu yang telah ditentukan.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <div class="feat-card">
+          <div class="feat-icon"><i class="bi bi-shield-check"></i></div>
+          <div class="feat-title">Keamanan & Integritas</div>
+          <p class="feat-desc">Soal diacak otomatis untuk setiap peserta, mencegah kecurangan dan memastikan hasil yang adil.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <div class="feat-card">
+          <div class="feat-icon"><i class="bi bi-people"></i></div>
+          <div class="feat-title">Manajemen Peserta</div>
+          <p class="feat-desc">Admin memantau data seluruh peserta, riwayat tryout, dan rekap nilai dalam satu dashboard terintegrasi.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ MATERI SKD ══════════ -->
+<section class="materi-sec" id="materi">
+  <div class="container">
+    <div class="row justify-content-center mb-5 text-center">
+      <div class="col-lg-7">
+        <div class="sec-chip">Materi SKD</div>
+        <h2 class="sec-title mb-3">Tiga Komponen <span class="acc">Seleksi Kompetensi Dasar</span></h2>
+        <p class="sec-sub mx-auto">Bank soal mencakup semua komponen SKD CPNS sesuai standar Badan Kepegawaian Negara (BKN).</p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="mat-card twk h-100">
+          <div class="mat-num">30</div>
+          <div class="mat-tag">TWK</div>
+          <div class="mat-title">Tes Wawasan Kebangsaan</div>
+          <p class="mat-desc">Mengukur penguasaan nilai-nilai kebangsaan: Pancasila, UUD 1945, NKRI, dan Bhinneka Tunggal Ika.</p>
+          <div class="mt-3 d-flex align-items-center gap-2" style="font-size:.8rem;color:var(--blue-main);font-weight:600;">
+            <i class="bi bi-book"></i> 30 Soal &nbsp;|&nbsp; <i class="bi bi-clock"></i> ~30 Menit
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mat-card tiu h-100">
+          <div class="mat-num">35</div>
+          <div class="mat-tag">TIU</div>
+          <div class="mat-title">Tes Intelegensia Umum</div>
+          <p class="mat-desc">Mengukur kemampuan verbal, numerik, dan figural. Meliputi analogi, silogisme, deret angka, dan logika.</p>
+          <div class="mt-3 d-flex align-items-center gap-2" style="font-size:.8rem;color:#198754;font-weight:600;">
+            <i class="bi bi-book"></i> 35 Soal &nbsp;|&nbsp; <i class="bi bi-clock"></i> ~45 Menit
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mat-card tkp h-100">
+          <div class="mat-num">45</div>
+          <div class="mat-tag">TKP</div>
+          <div class="mat-title">Tes Karakteristik Pribadi</div>
+          <p class="mat-desc">Menilai karakter ASN: pelayanan publik, jejaring kerja, sosial budaya, TI, dan profesionalisme.</p>
+          <div class="mt-3 d-flex align-items-center gap-2" style="font-size:.8rem;color:#a07800;font-weight:600;">
+            <i class="bi bi-book"></i> 45 Soal &nbsp;|&nbsp; <i class="bi bi-clock"></i> ~25 Menit
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="d-flex align-items-center gap-3 p-3 rounded-3" style="background:var(--blue-ghost);border:1px solid var(--blue-pale);">
+          <i class="bi bi-info-circle-fill text-primary fs-5 flex-shrink-0"></i>
+          <p class="mb-0" style="font-size:.855rem;color:var(--blue-dark);">
+            <strong>Nilai Ambang Batas SKD 2024:</strong> &nbsp;TWK ≥ 65 &nbsp;|&nbsp; TIU ≥ 80 &nbsp;|&nbsp; TKP ≥ 166 &nbsp;|&nbsp; Total ≥ 311 dari 550 poin.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CARA KERJA ══════════ -->
+<section class="cara-sec" id="cara">
+  <div class="container">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-5">
+        <div class="sec-chip">Cara Kerja</div>
+        <h2 class="sec-title mb-3">Mulai Tryout dalam <span class="acc">3 Langkah</span> Mudah</h2>
+        <p class="sec-sub">Proses yang simpel dan cepat, hasil nilai keluar secara real-time.</p>
+      </div>
+      <div class="col-lg-6 offset-lg-1">
+        <div class="step-item">
+          <div><div class="step-num">1</div><div class="step-connector"></div></div>
+          <div class="step-body">
+            <div class="step-title">Daftar & Masuk Akun</div>
+            <p class="step-desc">Daftar sebagai peserta Oman's Club Academy, lalu masuk ke portal tryout menggunakan email dan kata sandi.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div><div class="step-num">2</div><div class="step-connector"></div></div>
+          <div class="step-body">
+            <div class="step-title">Pilih Sesi & Kerjakan Soal</div>
+            <p class="step-desc">Pilih sesi tryout yang tersedia, lalu jawab 110 soal TWK, TIU, TKP dalam 100 menit. Soal diacak otomatis.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div><div class="step-num">3</div></div>
+          <div class="step-body">
+            <div class="step-title">Lihat Hasil & Analisis</div>
+            <p class="step-desc">Nilai keluar otomatis. Pantau performa per kategori dan identifikasi area yang perlu ditingkatkan.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ TESTIMONI ══════════ -->
+<section class="testi-sec" id="testimoni">
+  <div class="container">
+    <div class="row justify-content-center mb-5 text-center">
+      <div class="col-lg-6">
+        <div class="sec-chip light">Testimoni</div>
+        <h2 class="sec-title light mb-2">Kata Mereka yang <span class="acc">Sudah Berhasil</span></h2>
+        <p class="sec-sub light mx-auto">Puluhan peserta telah menggunakan platform ini dan berhasil lolos seleksi CPNS.</p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="testi-card">
+          <div class="testi-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+          <p class="testi-txt">"Berkat tryout online ini, saya terbiasa dengan tekanan waktu. Nilai TWK saya naik drastis. Alhamdulillah lulus SKD!"</p>
+          <div class="d-flex align-items-center gap-3">
+            <div class="testi-av">HC</div>
+            <div><div class="testi-name">Hosam Cepmek</div><div class="testi-role">Lulus CPNS Kejaksaan 2024</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="testi-card">
+          <div class="testi-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+          <p class="testi-txt">"Fitur analisis per kategori sangat membantu. Saya tahu persis kelemahan saya dan fokus belajar ke sana."</p>
+          <div class="d-flex align-items-center gap-3">
+            <div class="testi-av" style="background:linear-gradient(135deg,#198754,#06D6A0);">AB</div>
+            <div><div class="testi-name">Andika Bagot</div><div class="testi-role">Lulus CPNS Kehutanan 2024</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="testi-card">
+          <div class="testi-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></div>
+          <p class="testi-txt">"Soalnya mirip banget sama SKD beneran. Pas ujian asli, saya sudah familiar. Penilaian otomatisnya juga akurat."</p>
+          <div class="d-flex align-items-center gap-3">
+            <div class="testi-av" style="background:linear-gradient(135deg,#a07800,#C8A84B);">SJ</div>
+            <div><div class="testi-name">Syaiful Jambul</div><div class="testi-role">Lulus CPNS Kemenkes 2024</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CTA ══════════ -->
+<section class="cta-sec">
+  <div class="cta-blob" style="width:500px;height:500px;top:-200px;right:-100px;"></div>
+  <div class="cta-blob" style="width:300px;height:300px;bottom:-100px;left:10%;"></div>
+  <div class="container position-relative">
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-7">
+        <div class="sec-chip" style="background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);">Mulai Sekarang</div>
+        <h2 class="cta-title">Siap Jadi PNS?<br/>Mulai Latihan Hari Ini!</h2>
+        <p class="cta-sub mx-auto">Bergabung bersama puluhan peserta Oman's Club Academy yang sudah berlatih menggunakan platform tryout CPNS kami.</p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+          <a href="https://www.instagram.com/omansclub" target="_blank" class="btn btn-cta"><i class="bi bi-rocket-takeoff-fill me-2"></i>Daftar Sekarang</a>
+          <a href="login.html" class="btn" style="background:transparent;border:1.5px solid rgba(255,255,255,.38);color:var(--white);padding:.85rem 2rem;border-radius:50px;font-weight:600;font-size:.93rem;font-family:'Plus Jakarta Sans',sans-serif;transition:all .25s;">Sudah Punya Akun</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer id="kontak">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-lg-4 mb-2">
+        <div class="foot-brand">Oman's <span>Club</span> Academy</div>
+        <div class="foot-tag">Platform Tryout CPNS berbasis web terpercaya untuk membantu kamu lolos seleksi ASN.</div>
+        <div class="foot-social mt-3">
+          <a href="#"><i class="bi bi-instagram"></i></a>
+          <a href="#"><i class="bi bi-facebook"></i></a>
+          <a href="#"><i class="bi bi-whatsapp"></i></a>
+          <a href="#"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2 offset-lg-1">
+        <div class="foot-head">Platform</div>
+        <a href="#fitur" class="foot-link">Fitur Unggulan</a>
+        <a href="#materi" class="foot-link">Materi SKD</a>
+        <a href="#cara" class="foot-link">Cara Kerja</a>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="foot-head">Informasi</div>
+        <a href="#" class="foot-link">Tentang Kami</a>
+        <a href="#" class="foot-link">FAQ</a>
+        <a href="#testimoni" class="foot-link">Testimoni</a>
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="foot-head">Kontak</div>
+        <a href="#" class="foot-link"><i class="bi bi-envelope me-2"></i>info@omansclub.id</a>
+        <a href="#" class="foot-link"><i class="bi bi-whatsapp me-2"></i>+62 812-0000-0000</a>
+        <a href="#" class="foot-link"><i class="bi bi-geo-alt me-2"></i>Bandar Lampung, Indonesia</a>
+      </div>
+    </div>
+    <hr style="border-color:rgba(255,255,255,.07);margin:2rem 0 1.4rem;"/>
+    <div class="foot-copy">© 2026 Oman's Club Academy. Hak cipta dilindungi.</div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Navbar scroll effect
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  // Animated counter
+  function animateCounter(el, target, suffix) {
+    let start = 0;
+    const step = target / 60;
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) { start = target; clearInterval(timer); }
+      el.innerHTML = `${Math.floor(start)}<span>${suffix}</span>`;
+    }, 20);
+  }
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        animateCounter(document.getElementById('cnt-60'), 60, '+');
+        animateCounter(document.getElementById('cnt-82'), 82, '%');
+        animateCounter(document.getElementById('cnt-29'), 29, '+');
+        obs.disconnect();
+      }
+    });
+  }, { threshold: .3 });
+  const band = document.querySelector('.stats-band');
+  if (band) obs.observe(band);
+
+  // Prevent default on empty hrefs
+  document.querySelectorAll('a[href="#"]').forEach(a => a.addEventListener('click', e => e.preventDefault()));
+</script>
+</body>
+</html>

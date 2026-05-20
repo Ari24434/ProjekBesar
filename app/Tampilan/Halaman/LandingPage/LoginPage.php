@@ -84,10 +84,10 @@
       </div>
 
       <!-- Submit -->
-      <button type="submit" class="btn-submit" id="submitBtn">
+      <a href="<?= BASE_URL; ?>/user/beranda" type="submit" class="btn-submit" id="submitBtn">
         <i class="bi bi-box-arrow-in-right"></i>
         <span id="btnTxt">Masuk Sekarang</span>
-      </button>
+      </a>
     </form>
 
 
