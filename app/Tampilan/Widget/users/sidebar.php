@@ -31,3 +31,6 @@
     </div>
   </div>
 </aside>
+<script>
+  function konfirmKeluar() { if(confirm('Yakin ingin keluar?')) window.location.href='<?= BASE_URL ?>/login'; }
+</script>

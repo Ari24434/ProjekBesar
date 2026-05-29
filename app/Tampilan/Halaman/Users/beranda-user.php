@@ -16,8 +16,13 @@
             </div>
           </div>
           <a href="/user/daftar-tryout" class="btn btn-lg" onclick="nav('tryout')" style="background:rgba(255,255,255,.11);border:1.5px solid rgba(255,255,255,.2);color:#fff;flex-shrink:0;">
+<<<<<<< HEAD
             <i class="bi bi-play-circle-fill" style="color:#93C5FD;"></i> Mulai Tryout
           </button>
+=======
+            <i class="bi bi-play-circle-fill" style="color:#93C5FD;"></i> Ikuti Tryout
+          </a>
+>>>>>>> 0ef70c968c0f444099d5e4ba4a894d3e5d7b51df
         </div>
       </div>
 

@@ -12,7 +12,6 @@
 <body>
     <?php
         $nav_items = [
-            // Menu Utama
             'dashboard' => [
                 'url' => 'dashboard/beranda',
                 'icon' => 'bi-grid-fill',
