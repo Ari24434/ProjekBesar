@@ -79,8 +79,8 @@ foreach ($kodeOpsi as $kode) {
             <div class="soal-field-grid two">
               <div class="form-group">
                 <label class="form-label" for="subtopik">Subtopik</label>
-                <input class="form-input" id="subtopik" name="subtopik" type="text" placeholder="Belum tersedia di database" disabled>
-                <div class="field-help">Kolom subtopik belum tersedia di database.</div>
+                <input class="form-input" id="subtopik" name="subtopik" type="text" value="<?= htmlspecialchars($soal['subtopik'] ?? '') ?>" placeholder="Contoh: Pancasila, Analogi, Pelayanan Publik">
+                <div class="field-help">Opsional. Dipakai untuk evaluasi kelemahan peserta pada hasil tryout.</div>
               </div>
 
               <div class="form-group">
@@ -153,8 +153,8 @@ foreach ($kodeOpsi as $kode) {
           <div class="soal-section">
             <div class="form-group">
               <label class="form-label" for="pembahasan">Pembahasan / Catatan</label>
-              <textarea class="form-input form-textarea" id="pembahasan" name="pembahasan" placeholder="Belum tersedia di database." disabled></textarea>
-              <div class="field-help">Kolom pembahasan belum tersedia di database.</div>
+              <textarea class="form-input form-textarea" id="pembahasan" name="pembahasan" placeholder="Opsional, isi pembahasan singkat untuk kebutuhan review peserta."><?= htmlspecialchars($soal['pembahasan'] ?? '') ?></textarea>
+              <div class="field-help">Opsional. Akan tampil pada detail soal setelah peserta menyelesaikan tryout.</div>
             </div>
           </div>
 

@@ -6,6 +6,7 @@ $latestResult = $latestResult ?? null;
 $availableTryouts = $availableTryouts ?? [];
 $recentResults = $recentResults ?? [];
 $userDashboardError = $userDashboardError ?? null;
+$tryoutSettings = app_tryout_settings();
 
 $formatDate = function (?string $value, bool $withTime = false): string {
   if (!$value) {
@@ -17,10 +18,10 @@ $formatDate = function (?string $value, bool $withTime = false): string {
   return $timestamp ? date($withTime ? 'd M Y H:i' : 'd M Y', $timestamp) : '-';
 };
 
-$scorePct = $latestResult ? min(100, round(((float) $latestResult['total_nilai'] / 500) * 100)) : 0;
+$scorePct = $latestResult ? min(100, round(((float) $latestResult['total_nilai'] / 550) * 100)) : 0;
 $delta = (float) ($userStats['score_delta'] ?? 0);
 $deltaLabel = $delta > 0 ? '+' . number_format($delta, 0, ',', '.') : number_format($delta, 0, ',', '.');
-$passingTotal = 311;
+$passingTotal = (int) $tryoutSettings['passing_twk'] + (int) $tryoutSettings['passing_tiu'] + (int) $tryoutSettings['passing_tkp'];
 ?>
 
 <div class="page active" id="pg-dashboard">

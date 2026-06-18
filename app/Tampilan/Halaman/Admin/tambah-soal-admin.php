@@ -64,7 +64,11 @@
               <div class="form-group">
                 <label class="form-label" for="subtopik">Subtopik</label>
                 <input class="form-input" id="subtopik" name="subtopik" type="text" placeholder="Contoh: Pancasila, Analogi, Pelayanan Publik">
+<<<<<<< HEAD
                 <div class="field-help">Catatan: kolom subtopik belum disimpan ke database.</div>
+=======
+                <div class="field-help">Opsional. Dipakai untuk evaluasi kelemahan peserta pada hasil tryout.</div>
+>>>>>>> 887a69fd937d4b82d85b5392eb79834a99f757db
               </div>
 
               <div class="form-group">
@@ -120,7 +124,11 @@
             <div class="form-group">
               <label class="form-label" for="pembahasan">Pembahasan / Catatan</label>
               <textarea class="form-input form-textarea" id="pembahasan" name="pembahasan" placeholder="Opsional, isi pembahasan singkat untuk kebutuhan review peserta."></textarea>
+<<<<<<< HEAD
               <div class="field-help">Catatan: kolom pembahasan belum disimpan ke database.</div>
+=======
+              <div class="field-help">Opsional. Akan tampil pada detail soal setelah peserta menyelesaikan tryout.</div>
+>>>>>>> 887a69fd937d4b82d85b5392eb79834a99f757db
             </div>
           </div>
 

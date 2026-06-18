@@ -20,7 +20,7 @@
 }
 
 /* Modal Container */
-.modal {
+.modal-overlay .modal {
   background: var(--white);
   border-radius: var(--r-lg);
   width: 100%;
@@ -30,7 +30,7 @@
   box-shadow: 0 20px 60px rgba(8, 21, 58, 0.2);
 }
 
-.modal-lg {
+.modal-overlay .modal-lg {
   max-width: 700px;
 }
 
@@ -47,7 +47,7 @@
   z-index: 1;
 }
 
-.modal-title {
+.modal-overlay .modal-title {
   font-family: 'Playfair Display', serif;
   font-size: 17px;
   color: var(--ink);
@@ -74,7 +74,7 @@
 }
 
 /* Modal Body */
-.modal-body {
+.modal-overlay .modal-body {
   padding: 22px;
 }
 

@@ -348,9 +348,31 @@
 /* CTA Section */
 .cta-sec {
   padding: 5.5rem 0;
-  background: linear-gradient(135deg, var(--blue-main) 0%, var(--blue-dark) 100%);
+  background-color: #1E54B7;
+  background:
+    radial-gradient(circle at 82% -10%, rgba(255, 255, 255, 0.08) 0 24%, transparent 25%),
+    radial-gradient(circle at 12% 105%, rgba(200, 168, 75, 0.12) 0 20%, transparent 21%),
+    linear-gradient(135deg, #1E54B7 0%, #0D2149 100%);
   position: relative;
   overflow: hidden;
+  isolation: isolate;
+}
+
+.cta-sec::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 58px 58px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cta-sec .container {
+  position: relative;
+  z-index: 1;
 }
 
 .cta-blob {
@@ -358,13 +380,14 @@
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.05);
   pointer-events: none;
+  z-index: 0;
 }
 
 .cta-title {
   font-family: 'Playfair Display', serif;
   font-size: clamp(1.9rem, 3.8vw, 2.85rem);
   font-weight: 700;
-  color: var(--white);
+  color: #FFFFFF;
   margin-bottom: 0.9rem;
 }
 

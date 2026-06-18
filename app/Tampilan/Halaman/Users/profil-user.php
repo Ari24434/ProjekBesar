@@ -68,6 +68,10 @@ $areaPoints = $polylinePoints ? '8,92 ' . $polylinePoints . ' 92,92' : '';
         <div class="prof-email"><?= htmlspecialchars($user['email'] ?? '-') ?> &nbsp;-&nbsp; <?= htmlspecialchars($phone ?: '-') ?></div>
         <div class="prof-chip"><i class="bi bi-mortarboard-fill" style="font-size:10px;"></i> <?= htmlspecialchars(ucfirst($user['status'] ?? 'aktif')) ?> - Bergabung <?= htmlspecialchars($joinedDate) ?></div>
       </div>
+      <div class="profile-actions">
+        <a class="btn btn-ghost btn-sm" href="<?= BASE_URL ?>/user/riwayat"><i class="bi bi-clock-history"></i> Riwayat</a>
+        <a class="btn btn-primary btn-sm" href="<?= BASE_URL ?>/user/daftar-tryout"><i class="bi bi-play-circle-fill"></i> Tryout</a>
+      </div>
     </div>
 
     <div class="profile-stat-grid anim anim-d1">

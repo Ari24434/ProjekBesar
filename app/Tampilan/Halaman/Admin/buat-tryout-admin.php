@@ -1,8 +1,9 @@
 <?php
 $activeQuestionStock = $activeQuestionStock ?? ['TWK' => 0, 'TIU' => 0, 'TKP' => 0];
-$defaultTwk = min(30, (int) $activeQuestionStock['TWK']);
-$defaultTiu = min(35, (int) $activeQuestionStock['TIU']);
-$defaultTkp = min(45, (int) $activeQuestionStock['TKP']);
+$tryoutSettings = $tryoutSettings ?? app_default_tryout_settings();
+$defaultTwk = min((int) $tryoutSettings['soal_twk'], (int) $activeQuestionStock['TWK']);
+$defaultTiu = min((int) $tryoutSettings['soal_tiu'], (int) $activeQuestionStock['TIU']);
+$defaultTkp = min((int) $tryoutSettings['soal_tkp'], (int) $activeQuestionStock['TKP']);
 ?>
 
 <div class="page active" id="pg-buat-tryout">
@@ -61,7 +62,7 @@ $defaultTkp = min(45, (int) $activeQuestionStock['TKP']);
           <div class="form-row-3">
             <div class="form-group">
               <label class="form-label" for="waktu">Durasi Menit <span class="req">*</span></label>
-              <input class="form-input" id="waktu" name="waktu" type="number" min="1" value="100" required>
+              <input class="form-input" id="waktu" name="waktu" type="number" min="1" value="<?= (int) $tryoutSettings['durasi_default'] ?>" required>
             </div>
             <div class="form-group">
               <label class="form-label" for="tanggal_mulai">Tanggal Mulai <span class="req">*</span></label>
@@ -77,15 +78,15 @@ $defaultTkp = min(45, (int) $activeQuestionStock['TKP']);
             <div class="form-group">
               <label class="form-label" for="acak_soal">Pengacakan Soal</label>
               <select class="form-select" id="acak_soal" name="acak_soal">
-                <option value="1">Aktif - soal diacak</option>
-                <option value="0">Nonaktif - urutan tetap</option>
+                <option value="1" <?= (int) $tryoutSettings['acak_soal'] === 1 ? 'selected' : '' ?>>Aktif - soal diacak</option>
+                <option value="0" <?= (int) $tryoutSettings['acak_soal'] === 0 ? 'selected' : '' ?>>Nonaktif - urutan tetap</option>
               </select>
             </div>
             <div class="form-group">
               <label class="form-label" for="acak_opsi">Pengacakan Opsi</label>
               <select class="form-select" id="acak_opsi" name="acak_opsi">
-                <option value="0">Nonaktif - opsi tetap</option>
-                <option value="1">Aktif - opsi diacak</option>
+                <option value="0" <?= (int) $tryoutSettings['acak_opsi'] === 0 ? 'selected' : '' ?>>Nonaktif - opsi tetap</option>
+                <option value="1" <?= (int) $tryoutSettings['acak_opsi'] === 1 ? 'selected' : '' ?>>Aktif - opsi diacak</option>
               </select>
             </div>
           </div>
@@ -109,7 +110,7 @@ $defaultTkp = min(45, (int) $activeQuestionStock['TKP']);
           <span class="badge badge-twk">TWK <?= (int) $activeQuestionStock['TWK'] ?></span>
           <span class="badge badge-tiu">TIU <?= (int) $activeQuestionStock['TIU'] ?></span>
           <span class="badge badge-tkp">TKP <?= (int) $activeQuestionStock['TKP'] ?></span>
-          <span class="badge badge-pending">100 Menit</span>
+          <span class="badge badge-pending"><?= (int) $tryoutSettings['durasi_default'] ?> Menit</span>
         </div>
       </div>
     </div>

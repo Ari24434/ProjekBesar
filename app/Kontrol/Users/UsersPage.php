@@ -316,6 +316,7 @@ function UHTryout(){
     $idHasil = (int) ($_GET['id'] ?? 0);
     $result = null;
     $detailRows = [];
+<<<<<<< HEAD
     $resultError = null;
 
     try {
@@ -324,14 +325,36 @@ function UHTryout(){
                 SELECT *
                 FROM v_rekap_nilai
                 WHERE id_hasil = ? AND id_user = ?
+=======
+    $detailOptions = [];
+    $resultError = null;
+
+    try {
+        app_ensure_soal_review_schema();
+
+        if ($idHasil > 0) {
+            $result = db_fetch("
+                SELECT v.*, t.jml_soal_twk, t.jml_soal_tiu, t.jml_soal_tkp
+                FROM v_rekap_nilai v
+                JOIN tryout t ON t.id_tryout = v.id_tryout
+                WHERE v.id_hasil = ? AND v.id_user = ?
+>>>>>>> 887a69fd937d4b82d85b5392eb79834a99f757db
                 LIMIT 1
             ", [$idHasil, (int) $user['id_user']]);
         } else {
             $result = db_fetch("
+<<<<<<< HEAD
                 SELECT *
                 FROM v_rekap_nilai
                 WHERE id_user = ? AND status_pengerjaan IN ('selesai', 'timeout')
                 ORDER BY COALESCE(waktu_selesai, waktu_mulai) DESC, id_hasil DESC
+=======
+                SELECT v.*, t.jml_soal_twk, t.jml_soal_tiu, t.jml_soal_tkp
+                FROM v_rekap_nilai v
+                JOIN tryout t ON t.id_tryout = v.id_tryout
+                WHERE v.id_user = ? AND v.status_pengerjaan IN ('selesai', 'timeout')
+                ORDER BY COALESCE(v.waktu_selesai, v.waktu_mulai) DESC, v.id_hasil DESC
+>>>>>>> 887a69fd937d4b82d85b5392eb79834a99f757db
                 LIMIT 1
             ", [(int) $user['id_user']]);
         }
@@ -341,10 +364,22 @@ function UHTryout(){
                 SELECT
                     dh.*,
                     s.pertanyaan,
+<<<<<<< HEAD
                     k.kode AS kategori,
                     okj.kode_opsi AS kode_kunci,
                     od.teks_opsi AS teks_dipilih,
                     okj.teks_opsi AS teks_kunci
+=======
+                    s.gambar,
+                    s.subtopik,
+                    s.pembahasan,
+                    k.kode AS kategori,
+                    okj.kode_opsi AS kode_kunci,
+                    od.teks_opsi AS teks_dipilih,
+                    od.gambar_opsi AS gambar_dipilih,
+                    okj.teks_opsi AS teks_kunci,
+                    okj.gambar_opsi AS gambar_kunci
+>>>>>>> 887a69fd937d4b82d85b5392eb79834a99f757db
                 FROM detail_hasil dh
                 JOIN soal s ON s.id_soal = dh.id_soal
                 JOIN kategori k ON k.id_kategori = s.id_kategori
@@ -353,6 +388,25 @@ function UHTryout(){
                 WHERE dh.id_hasil = ?
                 ORDER BY dh.urutan_tampil ASC, dh.id_detail ASC
             ", [(int) $result['id_hasil']]);
+<<<<<<< HEAD
+=======
+
+            $soalIds = array_values(array_unique(array_map(static fn($row) => (int) $row['id_soal'], $detailRows)));
+
+            if ($soalIds) {
+                $placeholders = implode(',', array_fill(0, count($soalIds), '?'));
+                $optionRows = db_fetch_all("
+                    SELECT id_opsi, id_soal, kode_opsi, teks_opsi, gambar_opsi, poin, is_kunci
+                    FROM opsi_jawaban
+                    WHERE id_soal IN ({$placeholders})
+                    ORDER BY id_soal ASC, kode_opsi ASC
+                ", $soalIds);
+
+                foreach ($optionRows as $option) {
+                    $detailOptions[(int) $option['id_soal']][] = $option;
+                }
+            }
+>>>>>>> 887a69fd937d4b82d85b5392eb79834a99f757db
         }
     } catch (Throwable $e) {
         $resultError = 'Data hasil belum bisa dibaca: ' . $e->getMessage();
@@ -376,7 +430,23 @@ function USTryout(){
 
     try {
         $exam = db_fetch("
+<<<<<<< HEAD
             SELECT h.*, t.nama_tryout, t.deskripsi, t.waktu, t.acak_opsi, t.jml_soal_twk, t.jml_soal_tiu, t.jml_soal_tkp
+=======
+            SELECT
+                h.*,
+                t.nama_tryout,
+                t.deskripsi,
+                t.waktu,
+                t.tanggal_selesai,
+                t.acak_opsi,
+                t.jml_soal_twk,
+                t.jml_soal_tiu,
+                t.jml_soal_tkp,
+                UNIX_TIMESTAMP(NOW()) AS server_now_ts,
+                UNIX_TIMESTAMP(h.waktu_mulai) AS waktu_mulai_ts,
+                UNIX_TIMESTAMP(t.tanggal_selesai) AS tanggal_selesai_ts
+>>>>>>> 887a69fd937d4b82d85b5392eb79834a99f757db
             FROM hasil h
             JOIN tryout t ON t.id_tryout = h.id_tryout
             WHERE h.id_hasil = ? AND h.id_user = ? AND h.status_pengerjaan = 'sedang'
@@ -466,7 +536,11 @@ function USubmitTryout(){
 
     try {
         $hasil = db_fetch("
+<<<<<<< HEAD
             SELECT h.*, t.waktu
+=======
+            SELECT h.*, t.waktu, t.tanggal_selesai
+>>>>>>> 887a69fd937d4b82d85b5392eb79834a99f757db
             FROM hasil h
             JOIN tryout t ON t.id_tryout = h.id_tryout
             WHERE h.id_hasil = ? AND h.id_user = ? AND h.status_pengerjaan = 'sedang'
@@ -479,6 +553,10 @@ function USubmitTryout(){
         }
 
         $questions = user_exam_questions((int) $hasil['id_tryout'], false);
+<<<<<<< HEAD
+=======
+        $tryoutSettings = app_tryout_settings();
+>>>>>>> 887a69fd937d4b82d85b5392eb79834a99f757db
         $scores = [
             'nilai_twk' => 0,
             'nilai_tiu' => 0,
@@ -487,7 +565,11 @@ function USubmitTryout(){
             'benar_tiu' => 0,
         ];
 
+<<<<<<< HEAD
         DatabasePool::transaction(function () use ($idHasil, $hasil, $answers, $questions, &$scores) {
+=======
+        DatabasePool::transaction(function () use ($idHasil, $hasil, $answers, $questions, $tryoutSettings, &$scores) {
+>>>>>>> 887a69fd937d4b82d85b5392eb79834a99f757db
             db_execute('DELETE FROM detail_hasil WHERE id_hasil = ?', [$idHasil]);
 
             foreach ($questions as $index => $question) {
@@ -537,9 +619,15 @@ function USubmitTryout(){
             }
 
             $total = $scores['nilai_twk'] + $scores['nilai_tiu'] + $scores['nilai_tkp'];
+<<<<<<< HEAD
             $lulusTwk = $scores['nilai_twk'] >= 65 ? 1 : 0;
             $lulusTiu = $scores['nilai_tiu'] >= 80 ? 1 : 0;
             $lulusTkp = $scores['nilai_tkp'] >= 166 ? 1 : 0;
+=======
+            $lulusTwk = $scores['nilai_twk'] >= (int) $tryoutSettings['passing_twk'] ? 1 : 0;
+            $lulusTiu = $scores['nilai_tiu'] >= (int) $tryoutSettings['passing_tiu'] ? 1 : 0;
+            $lulusTkp = $scores['nilai_tkp'] >= (int) $tryoutSettings['passing_tkp'] ? 1 : 0;
+>>>>>>> 887a69fd937d4b82d85b5392eb79834a99f757db
             $lulusTotal = ($lulusTwk && $lulusTiu && $lulusTkp) ? 1 : 0;
             $status = user_exam_is_timeout($hasil) ? 'timeout' : 'selesai';
 
@@ -650,10 +738,30 @@ function user_exam_public_questions(array $questions): array{
 }
 
 function user_exam_is_timeout(array $hasil): bool{
+<<<<<<< HEAD
     $started = strtotime($hasil['waktu_mulai'] ?? 'now');
     $duration = max(1, (int) ($hasil['waktu'] ?? 100)) * 60;
 
     return time() > ($started + $duration);
+=======
+    $deadline = user_exam_deadline_timestamp($hasil);
+    $nowRow = db_fetch('SELECT UNIX_TIMESTAMP(NOW()) AS now_ts');
+    $now = (int) ($nowRow['now_ts'] ?? time());
+
+    return $now >= $deadline;
+}
+
+function user_exam_deadline_timestamp(array $hasil): int{
+    $started = strtotime($hasil['waktu_mulai'] ?? 'now');
+    $durationDeadline = $started + (max(1, (int) ($hasil['waktu'] ?? 100)) * 60);
+    $scheduleDeadline = !empty($hasil['tanggal_selesai']) ? strtotime($hasil['tanggal_selesai']) : null;
+
+    if ($scheduleDeadline && $scheduleDeadline > 0) {
+        return min($durationDeadline, $scheduleDeadline);
+    }
+
+    return $durationDeadline;
+>>>>>>> 887a69fd937d4b82d85b5392eb79834a99f757db
 }
 
 function user_update_rankings(int $idTryout): void{

@@ -157,4 +157,87 @@ function db_execute(string $sql, array $params = []): int
     return DatabasePool::execute($sql, $params);
 }
 
+function db_column_exists(string $table, string $column): bool
+{
+    return (bool) db_fetch("
+        SELECT COLUMN_NAME
+        FROM INFORMATION_SCHEMA.COLUMNS
+        WHERE TABLE_SCHEMA = DATABASE()
+          AND TABLE_NAME = ?
+          AND COLUMN_NAME = ?
+    ", [$table, $column]);
+}
+
+function app_ensure_soal_review_schema(): void
+{
+    if (!db_column_exists('soal', 'subtopik')) {
+        db_execute("ALTER TABLE soal ADD COLUMN subtopik VARCHAR(120) DEFAULT NULL COMMENT 'Subtopik atau materi kecil soal' AFTER gambar");
+    }
+
+    if (!db_column_exists('soal', 'pembahasan')) {
+        db_execute("ALTER TABLE soal ADD COLUMN pembahasan TEXT NULL COMMENT 'Pembahasan/evaluasi jawaban untuk peserta' AFTER tingkat_kesulitan");
+    }
+}
+
+function app_default_tryout_settings(): array
+{
+    return [
+        'durasi_default' => 100,
+        'jumlah_soal_per_sesi' => 110,
+        'soal_twk' => 30,
+        'soal_tiu' => 35,
+        'soal_tkp' => 45,
+        'passing_twk' => 65,
+        'passing_tiu' => 80,
+        'passing_tkp' => 166,
+        'acak_soal' => 1,
+        'acak_opsi' => 0,
+    ];
+}
+
+function app_ensure_settings_schema(): void
+{
+    db_execute("
+        CREATE TABLE IF NOT EXISTS pengaturan (
+            nama_pengaturan VARCHAR(80) NOT NULL,
+            nilai_pengaturan TEXT NULL,
+            deskripsi VARCHAR(255) DEFAULT NULL,
+            updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            PRIMARY KEY (nama_pengaturan)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+    ");
+}
+
+function app_tryout_settings(): array
+{
+    app_ensure_settings_schema();
+
+    $settings = app_default_tryout_settings();
+    $rows = db_fetch_all("SELECT nama_pengaturan, nilai_pengaturan FROM pengaturan WHERE nama_pengaturan LIKE 'tryout_%'");
+
+    foreach ($rows as $row) {
+        $key = preg_replace('/^tryout_/', '', (string) $row['nama_pengaturan']);
+
+        if (array_key_exists($key, $settings)) {
+            $settings[$key] = (int) $row['nilai_pengaturan'];
+        }
+    }
+
+    return $settings;
+}
+
+function app_save_tryout_settings(array $settings): void
+{
+    app_ensure_settings_schema();
+
+    foreach ($settings as $key => $value) {
+        db_execute(
+            'INSERT INTO pengaturan (nama_pengaturan, nilai_pengaturan, deskripsi)
+             VALUES (?, ?, ?)
+             ON DUPLICATE KEY UPDATE nilai_pengaturan = VALUES(nilai_pengaturan), deskripsi = VALUES(deskripsi)',
+            ['tryout_' . $key, (string) (int) $value, 'Konfigurasi tryout global']
+        );
+    }
+}
+
 ?>

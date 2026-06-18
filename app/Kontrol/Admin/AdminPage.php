@@ -84,6 +84,7 @@ function AKelolaTryout(){
 
 function ABuatTryout(){
     $activeQuestionStock = admin_active_question_stock();
+    $tryoutSettings = app_tryout_settings();
     $title = "OC Tryout - Buat Tryout Baru";
     $topbarTitle = "Buat Tryout Baru";
     $active_menu = 'tryout';
@@ -283,16 +284,17 @@ function ADeleteTryout(){
 }
 
 function admin_tryout_payload(): array{
+    $tryoutSettings = app_tryout_settings();
     $nama = trim($_POST['nama_tryout'] ?? '');
     $deskripsi = trim($_POST['deskripsi'] ?? '');
     $status = strtolower(trim($_POST['status'] ?? 'draft'));
     $validStatus = ['draft', 'aktif', 'selesai', 'diarsipkan'];
     $tanggalMulai = admin_normalize_datetime($_POST['tanggal_mulai'] ?? '');
     $tanggalSelesai = admin_normalize_datetime($_POST['tanggal_selesai'] ?? '');
-    $waktu = max(1, (int) ($_POST['waktu'] ?? 100));
-    $twk = max(0, (int) ($_POST['jml_soal_twk'] ?? 30));
-    $tiu = max(0, (int) ($_POST['jml_soal_tiu'] ?? 35));
-    $tkp = max(0, (int) ($_POST['jml_soal_tkp'] ?? 45));
+    $waktu = max(1, (int) ($_POST['waktu'] ?? $tryoutSettings['durasi_default']));
+    $twk = max(0, (int) ($_POST['jml_soal_twk'] ?? $tryoutSettings['soal_twk']));
+    $tiu = max(0, (int) ($_POST['jml_soal_tiu'] ?? $tryoutSettings['soal_tiu']));
+    $tkp = max(0, (int) ($_POST['jml_soal_tkp'] ?? $tryoutSettings['soal_tkp']));
 
     if ($nama === '') {
         redirect_admin_tryout('Nama tryout wajib diisi.', 'error');
@@ -324,8 +326,8 @@ function admin_tryout_payload(): array{
         'jml_soal_tkp' => $tkp,
         'tanggal_mulai' => $tanggalMulai,
         'tanggal_selesai' => $tanggalSelesai,
-        'acak_soal' => (int) ($_POST['acak_soal'] ?? 1) === 1 ? 1 : 0,
-        'acak_opsi' => (int) ($_POST['acak_opsi'] ?? 0) === 1 ? 1 : 0,
+        'acak_soal' => (int) ($_POST['acak_soal'] ?? $tryoutSettings['acak_soal']) === 1 ? 1 : 0,
+        'acak_opsi' => (int) ($_POST['acak_opsi'] ?? $tryoutSettings['acak_opsi']) === 1 ? 1 : 0,
     ];
 }
 
@@ -433,6 +435,7 @@ function AEditSoal(){
     }
 
     admin_ensure_opsi_media_schema();
+    app_ensure_soal_review_schema();
 
     $soal = db_fetch("
         SELECT s.*, k.kode AS kategori
@@ -462,6 +465,7 @@ function AEditSoal(){
 
 function AStoreSoal(){
     admin_ensure_opsi_media_schema();
+    app_ensure_soal_review_schema();
     $data = admin_soal_payload();
 
     try {
@@ -473,12 +477,14 @@ function AStoreSoal(){
             }
 
             db_execute(
-                'INSERT INTO soal (id_kategori, pertanyaan, gambar, tingkat_kesulitan, status, dibuat_oleh) VALUES (?, ?, ?, ?, ?, ?)',
+                'INSERT INTO soal (id_kategori, pertanyaan, gambar, subtopik, tingkat_kesulitan, pembahasan, status, dibuat_oleh) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
                 [
                     (int) $kategoriRow['id_kategori'],
                     $data['pertanyaan'],
                     $data['gambar'] !== '' ? $data['gambar'] : null,
+                    $data['subtopik'] !== '' ? $data['subtopik'] : null,
                     $data['tingkat_kesulitan'],
+                    $data['pembahasan'] !== '' ? $data['pembahasan'] : null,
                     $data['status'],
                     1,
                 ]
@@ -502,6 +508,7 @@ function AStoreSoal(){
 
 function AUpdateSoal(){
     admin_ensure_opsi_media_schema();
+    app_ensure_soal_review_schema();
     $idSoal = (int) ($_POST['id_soal'] ?? 0);
 
     if ($idSoal <= 0) {
@@ -532,12 +539,14 @@ function AUpdateSoal(){
             }
 
             db_execute(
-                'UPDATE soal SET id_kategori = ?, pertanyaan = ?, gambar = ?, tingkat_kesulitan = ?, status = ? WHERE id_soal = ?',
+                'UPDATE soal SET id_kategori = ?, pertanyaan = ?, gambar = ?, subtopik = ?, tingkat_kesulitan = ?, pembahasan = ?, status = ? WHERE id_soal = ?',
                 [
                     (int) $kategoriRow['id_kategori'],
                     $data['pertanyaan'],
                     $data['gambar'] !== '' ? $data['gambar'] : null,
+                    $data['subtopik'] !== '' ? $data['subtopik'] : null,
                     $data['tingkat_kesulitan'],
+                    $data['pembahasan'] !== '' ? $data['pembahasan'] : null,
                     $data['status'],
                     $idSoal,
                 ]
@@ -579,6 +588,8 @@ function admin_soal_payload(?string $existingGambar = null, array $existingOpsiG
     $tingkatKesulitan = strtolower(trim($_POST['tingkat_kesulitan'] ?? 'sedang'));
     $status = strtolower(trim($_POST['status'] ?? 'aktif'));
     $pertanyaan = trim($_POST['pertanyaan'] ?? '');
+    $subtopik = trim($_POST['subtopik'] ?? '');
+    $pembahasan = trim($_POST['pembahasan'] ?? '');
     $jawabanBenar = strtoupper(trim($_POST['jawaban_benar'] ?? ''));
     $validKategori = ['TWK', 'TIU', 'TKP'];
     $validKesulitan = ['mudah', 'sedang', 'sulit'];
@@ -617,11 +628,21 @@ function admin_soal_payload(?string $existingGambar = null, array $existingOpsiG
         redirect_admin_soal('Isi teks soal atau upload gambar soal terlebih dahulu.', 'error');
     }
 
+    if (strlen($subtopik) > 120) {
+        redirect_admin_soal('Subtopik maksimal 120 karakter.', 'error');
+    }
+
+    if (strlen($pembahasan) > 12000) {
+        redirect_admin_soal('Pembahasan terlalu panjang. Maksimal 12.000 karakter.', 'error');
+    }
+
     return [
         'kategori' => $kategori,
         'tingkat_kesulitan' => $tingkatKesulitan,
         'status' => $status,
         'pertanyaan' => $pertanyaan,
+        'subtopik' => $subtopik,
+        'pembahasan' => $pembahasan,
         'gambar' => $gambar ?? '',
         'jawaban_benar' => $jawabanBenar,
         'kode_opsi' => $kodeOpsi,
@@ -1115,6 +1136,7 @@ function ALaporanRekap(){
 
 function APengaturan(){
     $adminAccount = admin_current_account();
+    $tryoutSettings = app_tryout_settings();
     $systemInfo = [
         'app_name' => function_exists('app_env_value') ? app_env_value('APP_NAME', "Oman's Club Academy") : "Oman's Club Academy",
         'app_env' => function_exists('app_env_value') ? app_env_value('APP_ENV', 'development') : 'development',
@@ -1177,6 +1199,51 @@ function APengaturan(){
     $topbar = BASE_PATH . "/app/Tampilan/Widget/Admin/topbar.php";
     $content = BASE_PATH . "/app/Tampilan/Halaman/Admin/pengaturan-admin.php";
     include BASE_PATH . "/app/Tampilan/Layout/Admin-layout.php";
+}
+
+function AUpdateTryoutSettings(){
+    $settings = [
+        'durasi_default' => max(1, min(300, (int) ($_POST['durasi_default'] ?? 100))),
+        'soal_twk' => max(0, min(200, (int) ($_POST['soal_twk'] ?? 30))),
+        'soal_tiu' => max(0, min(200, (int) ($_POST['soal_tiu'] ?? 35))),
+        'soal_tkp' => max(0, min(200, (int) ($_POST['soal_tkp'] ?? 45))),
+        'passing_twk' => max(0, min(500, (int) ($_POST['passing_twk'] ?? 65))),
+        'passing_tiu' => max(0, min(500, (int) ($_POST['passing_tiu'] ?? 80))),
+        'passing_tkp' => max(0, min(500, (int) ($_POST['passing_tkp'] ?? 166))),
+        'acak_soal' => (int) ($_POST['acak_soal'] ?? 1) === 1 ? 1 : 0,
+        'acak_opsi' => (int) ($_POST['acak_opsi'] ?? 0) === 1 ? 1 : 0,
+    ];
+
+    $settings['jumlah_soal_per_sesi'] = $settings['soal_twk'] + $settings['soal_tiu'] + $settings['soal_tkp'];
+
+    if ($settings['jumlah_soal_per_sesi'] <= 0) {
+        redirect_admin_settings('Jumlah soal per sesi minimal 1.', 'error');
+    }
+
+    try {
+        DatabasePool::transaction(function () use ($settings) {
+            app_save_tryout_settings($settings);
+            db_execute(
+                "UPDATE hasil
+                 SET lulus_twk = IF(nilai_twk >= ?, 1, 0),
+                     lulus_tiu = IF(nilai_tiu >= ?, 1, 0),
+                     lulus_tkp = IF(nilai_tkp >= ?, 1, 0),
+                     lulus_total = IF(nilai_twk >= ? AND nilai_tiu >= ? AND nilai_tkp >= ?, 1, 0)
+                 WHERE status_pengerjaan IN ('selesai', 'timeout')",
+                [
+                    $settings['passing_twk'],
+                    $settings['passing_tiu'],
+                    $settings['passing_tkp'],
+                    $settings['passing_twk'],
+                    $settings['passing_tiu'],
+                    $settings['passing_tkp'],
+                ]
+            );
+        });
+        redirect_admin_settings('Konfigurasi tryout berhasil disimpan.', 'success');
+    } catch (Throwable $e) {
+        redirect_admin_settings('Gagal menyimpan konfigurasi tryout: ' . $e->getMessage(), 'error');
+    }
 }
 
 function AUpdateAdminProfile(){

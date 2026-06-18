@@ -43,7 +43,46 @@ function app_env_value(string $key, mixed $default = null): mixed
     return $default;
 }
 
-define('BASE_URL', rtrim(app_env_value('APP_URL', 'http://localhost'), '/'));
+date_default_timezone_set((string) app_env_value('APP_TIMEZONE', 'Asia/Jakarta'));
+
+function app_request_base_url(): string
+{
+    $host = $_SERVER['HTTP_X_FORWARDED_HOST'] ?? $_SERVER['HTTP_HOST'] ?? 'localhost';
+    $host = trim(explode(',', $host)[0]);
+
+    $proto = $_SERVER['HTTP_X_FORWARDED_PROTO'] ?? null;
+
+    if ($proto) {
+        $scheme = trim(explode(',', $proto)[0]);
+    } else {
+        $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+    }
+
+    return $scheme . '://' . $host;
+}
+
+function app_base_url(): string
+{
+    $configuredUrl = rtrim((string) app_env_value('APP_URL', ''), '/');
+    $requestUrl = app_request_base_url();
+    $requestHost = parse_url($requestUrl, PHP_URL_HOST) ?: '';
+    $configuredHost = parse_url($configuredUrl, PHP_URL_HOST) ?: '';
+
+    if ($configuredUrl === '') {
+        return $requestUrl;
+    }
+
+    $configuredIsLocal = in_array($configuredHost, ['localhost', '127.0.0.1', '::1'], true);
+    $requestIsLocal = in_array($requestHost, ['localhost', '127.0.0.1', '::1'], true);
+
+    if ($configuredIsLocal && !$requestIsLocal) {
+        return $requestUrl;
+    }
+
+    return $configuredUrl;
+}
+
+define('BASE_URL', app_base_url());
 
 require BASE_PATH . '/app/helpers/url.php';
 require BASE_PATH . '/app/Pusat/db.php';

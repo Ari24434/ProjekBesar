@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +14,10 @@
     <script>
         window.APP_BASE_URL = '<?= rtrim(BASE_URL, '/') ?>';
     </script>
+=======
+<?php include BASE_PATH . "/app/Tampilan/Layout/partials/document-head.php"; ?>
+<body class="layout-user">
+>>>>>>> 887a69fd937d4b82d85b5392eb79834a99f757db
     <?php
         $userFlash = $_SESSION['flash'] ?? null;
         unset($_SESSION['flash']);
@@ -53,9 +58,16 @@
         ?>
     </div>
     
+<<<<<<< HEAD
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="<?= url('Scripts/app.js') ?>"></script>
+=======
+    <?php
+        $includeSweetAlert = true;
+        include BASE_PATH . "/app/Tampilan/Layout/partials/document-scripts.php";
+    ?>
+>>>>>>> 887a69fd937d4b82d85b5392eb79834a99f757db
     <?php if ($userFlash): ?>
     <script>
         document.addEventListener('DOMContentLoaded', function () {

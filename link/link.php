@@ -43,4 +43,5 @@ get('/Admin/laporan-rekap', 'ALaporanRekap');
 get('/Admin/pengaturan', 'APengaturan');
 post('/Admin/pengaturan/profil', 'AUpdateAdminProfile');
 post('/Admin/pengaturan/password', 'AUpdateAdminPassword');
+post('/Admin/pengaturan/tryout', 'AUpdateTryoutSettings');
 ?>

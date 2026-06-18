@@ -17,8 +17,8 @@
    ================================================== */
 
 /* Base Styles */
-@import url('./Basis/reset.css');
 @import url('./Basis/variables.css');
+@import url('./Basis/reset.css');
 
 /* Layout */
 @import url('./Layout/main.css');

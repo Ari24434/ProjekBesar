@@ -11,9 +11,14 @@ foreach ($examQuestions as $question) {
   }
 }
 
-$startedAt = $exam ? strtotime($exam['waktu_mulai']) : time();
+$serverNow = $exam ? (int) ($exam['server_now_ts'] ?? time()) : time();
+$startedAt = $exam ? (int) ($exam['waktu_mulai_ts'] ?? strtotime($exam['waktu_mulai'])) : $serverNow;
 $durationSeconds = max(1, (int) ($exam['waktu'] ?? 100)) * 60;
-$remainingSeconds = max(0, ($startedAt + $durationSeconds) - time());
+$durationDeadline = $startedAt + $durationSeconds;
+$scheduleDeadline = $exam ? (int) ($exam['tanggal_selesai_ts'] ?? 0) : 0;
+$deadlineAt = $scheduleDeadline > 0 ? min($durationDeadline, $scheduleDeadline) : $durationDeadline;
+$remainingSeconds = max(0, $deadlineAt - $serverNow);
+$deadlineLabel = date('d M Y H:i', $deadlineAt);
 ?>
 
 <div class="page active" id="pg-exam">
@@ -35,7 +40,11 @@ $remainingSeconds = max(0, ($startedAt + $durationSeconds) - time());
         <?= csrf_field() ?>
         <input type="hidden" name="id_hasil" value="<?= (int) $exam['id_hasil'] ?>">
 
+<<<<<<< HEAD
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:15px;" class="anim">
+=======
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:15px;" class="exam-page-head anim">
+>>>>>>> 887a69fd937d4b82d85b5392eb79834a99f757db
           <div>
             <div style="font-family:'Playfair Display',serif;font-size:17px;color:var(--ink);"><?= htmlspecialchars($exam['nama_tryout']) ?></div>
             <div style="font-size:12px;color:var(--ash);margin-top:2px;">Sedang mengerjakan - <span id="exam-cat-label" style="color:var(--blue-main);font-weight:600;">TWK</span></div>
@@ -53,7 +62,11 @@ $remainingSeconds = max(0, ($startedAt + $durationSeconds) - time());
             </div>
             <div class="exam-body">
               <div class="exam-question" id="ex-qtext"></div>
+<<<<<<< HEAD
               <div id="ex-qimage" style="margin:12px 0;display:none;"></div>
+=======
+              <div class="exam-question-media-wrap" id="ex-qimage" style="display:none;"></div>
+>>>>>>> 887a69fd937d4b82d85b5392eb79834a99f757db
               <div class="exam-options" id="ex-options"></div>
             </div>
             <div class="exam-footer">
@@ -67,6 +80,10 @@ $remainingSeconds = max(0, ($startedAt + $durationSeconds) - time());
             <div class="panel-timer">
               <div class="timer-num" id="ex-timer">00:00</div>
               <div class="timer-sub">Sisa waktu</div>
+<<<<<<< HEAD
+=======
+              <div class="timer-deadline">Batas: <?= htmlspecialchars($deadlineLabel) ?></div>
+>>>>>>> 887a69fd937d4b82d85b5392eb79834a99f757db
             </div>
             <div class="panel-section">
               <div class="panel-label">Navigasi Soal</div>
@@ -124,6 +141,7 @@ $remainingSeconds = max(0, ($startedAt + $durationSeconds) - time());
 
   function startTimer() {
     renderTimer();
+<<<<<<< HEAD
     timerInt = setInterval(function () {
       timerSec--;
       renderTimer();
@@ -210,6 +228,152 @@ $remainingSeconds = max(0, ($startedAt + $durationSeconds) - time());
         renderQ(i);
       };
       g.appendChild(d);
+=======
+
+    if (timerSec <= 0) {
+      document.getElementById('examForm').submit();
+      return;
+    }
+
+    timerInt = setInterval(function () {
+      timerSec--;
+      renderTimer();
+
+      if (timerSec <= 0) {
+        clearInterval(timerInt);
+        document.getElementById('examForm').submit();
+      }
+    }, 1000);
+  }
+
+  function renderQ(i) {
+    curQ = i;
+    const q = QS[i];
+    const cat = q.kategori;
+    const catNumber = QS.slice(0, i + 1).filter(function (item) {
+      return item.kategori === cat;
+    }).length;
+    document.getElementById('ex-cat-chip').textContent = cat;
+    document.getElementById('ex-qnum').textContent = catNumber;
+    document.getElementById('ex-qtotal').textContent = CAT_TOTALS[cat] || TOTAL;
+    document.getElementById('exam-cat-label').textContent = CAT_LABELS[cat] || cat;
+    document.getElementById('ex-qtext').textContent = q.pertanyaan;
+
+    const imgWrap = document.getElementById('ex-qimage');
+    imgWrap.innerHTML = '';
+    imgWrap.style.display = 'none';
+
+    if (q.gambar) {
+      imgWrap.style.display = 'block';
+      imgWrap.innerHTML = `<img class="exam-question-media" src="<?= BASE_URL ?>/${q.gambar}" alt="Gambar soal">`;
+    }
+
+    const ol = document.getElementById('ex-options');
+    ol.innerHTML = '';
+
+    q.opsi.forEach(function (opt) {
+      const selected = Number(answers[q.id_soal] || 0) === Number(opt.id_opsi);
+      const d = document.createElement('div');
+      d.className = 'exam-opt' + (selected ? ' selected' : '');
+      const optionImage = opt.gambar_opsi
+        ? `<img class="exam-option-media" src="<?= BASE_URL ?>/${escapeHtml(opt.gambar_opsi)}" alt="Gambar opsi ${escapeHtml(opt.kode_opsi || '')}">`
+        : '';
+      d.innerHTML = `<div class="opt-label">${escapeHtml(opt.kode_opsi || '')}</div><div class="opt-text">${escapeHtml(opt.teks_opsi || '')}${optionImage}</div>`;
+      d.onclick = function () {
+        answers[q.id_soal] = opt.id_opsi;
+        syncAnswerInputs();
+        renderQ(i);
+      };
+      ol.appendChild(d);
+    });
+
+    document.getElementById('ex-prev').disabled = i === 0;
+    const nx = document.getElementById('ex-next');
+
+    if (i === TOTAL - 1) {
+      nx.innerHTML = '<i class="bi bi-send-check"></i> Kumpulkan';
+      nx.onclick = submitExam;
+    } else {
+      nx.innerHTML = 'Selanjutnya <i class="bi bi-arrow-right"></i>';
+      nx.onclick = nextQ;
+    }
+
+    document.querySelectorAll('.cat-tab').forEach(function (tab) {
+      tab.classList.remove('active');
+    });
+
+    const firstIndex = QS.findIndex(function (item) {
+      return item.kategori === cat;
+    });
+    const catTab = document.getElementById('cat-' + firstIndex);
+
+    if (catTab) {
+      catTab.classList.add('active');
+>>>>>>> 887a69fd937d4b82d85b5392eb79834a99f757db
+    }
+  }
+
+<<<<<<< HEAD
+  function updateCounts() {
+    const counts = {TWK: 0, TIU: 0, TKP: 0};
+
+    QS.forEach(function (q) {
+      if (answers[q.id_soal]) {
+        counts[q.kategori] = (counts[q.kategori] || 0) + 1;
+      }
+    });
+
+    document.getElementById('ps-twk').textContent = `${counts.TWK || 0} / ${CAT_TOTALS.TWK || 0}`;
+    document.getElementById('ps-tiu').textContent = `${counts.TIU || 0} / ${CAT_TOTALS.TIU || 0}`;
+    document.getElementById('ps-tkp').textContent = `${counts.TKP || 0} / ${CAT_TOTALS.TKP || 0}`;
+    document.getElementById('ex-answered').textContent = `${Object.keys(answers).length} / ${TOTAL} dijawab`;
+  }
+
+  function syncAnswerInputs() {
+    const wrap = document.getElementById('answerInputs');
+    wrap.innerHTML = '';
+
+    Object.keys(answers).forEach(function (idSoal) {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = `jawaban[${idSoal}]`;
+      input.value = answers[idSoal];
+      wrap.appendChild(input);
+    });
+  }
+
+  function submitExam() {
+    const answered = Object.keys(answers).length;
+    const message = answered < TOTAL
+      ? `Masih ada ${TOTAL - answered} soal belum dijawab. Tetap kumpulkan?`
+      : 'Kumpulkan jawaban sekarang?';
+
+    if (confirm(message)) {
+      document.getElementById('examForm').submit();
+    }
+  }
+
+  function nextQ() {
+    if (curQ < TOTAL - 1) renderQ(curQ + 1);
+  }
+
+=======
+    buildGrid();
+    updateCounts();
+  }
+
+  function buildGrid() {
+    const g = document.getElementById('ex-qgrid');
+    g.innerHTML = '';
+
+    for (let i = 0; i < TOTAL; i++) {
+      const d = document.createElement('div');
+      d.className = 'qn' + (answers[QS[i].id_soal] ? ' done' : '') + (i === curQ ? ' cur' : '');
+      d.textContent = i + 1;
+      d.onclick = function () {
+        renderQ(i);
+      };
+      g.appendChild(d);
     }
   }
 
@@ -256,6 +420,7 @@ $remainingSeconds = max(0, ($startedAt + $durationSeconds) - time());
     if (curQ < TOTAL - 1) renderQ(curQ + 1);
   }
 
+>>>>>>> 887a69fd937d4b82d85b5392eb79834a99f757db
   function prevQ() {
     if (curQ > 0) renderQ(curQ - 1);
   }
@@ -273,7 +438,10 @@ $remainingSeconds = max(0, ($startedAt + $durationSeconds) - time());
       .replaceAll("'", '&#039;');
   }
 
+<<<<<<< HEAD
   buildGrid();
+=======
+>>>>>>> 887a69fd937d4b82d85b5392eb79834a99f757db
   renderQ(0);
   startTimer();
 </script>

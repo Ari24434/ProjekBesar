@@ -2,6 +2,7 @@
 $systemInfo = $systemInfo ?? [];
 $settingsError = $settingsError ?? null;
 $adminAccount = $adminAccount ?? null;
+$tryoutSettings = $tryoutSettings ?? app_default_tryout_settings();
 
 $infoRows = [
   'Nama Aplikasi' => $systemInfo['app_name'] ?? "Oman's Club Academy",
@@ -82,24 +83,60 @@ $infoRows = [
         <div class="card">
           <div class="card-head"><div class="card-title"><i class="bi bi-sliders"></i> Konfigurasi Tryout</div></div>
           <div style="padding:18px;">
-            <div class="form-row">
-              <div class="form-group"><label class="form-label">Durasi Default (menit)</label><input type="number" class="form-input" value="100"></div>
-              <div class="form-group"><label class="form-label">Jumlah Soal per Sesi</label><input type="number" class="form-input" value="110"></div>
-              <div class="form-group"><label class="form-label">Soal TWK</label><input type="number" class="form-input" value="30"></div>
-              <div class="form-group"><label class="form-label">Soal TIU</label><input type="number" class="form-input" value="35"></div>
-              <div class="form-group"><label class="form-label">Soal TKP</label><input type="number" class="form-input" value="45"></div>
-              <div class="form-group"><label class="form-label">Passing Grade TWK</label><input type="number" class="form-input" value="65"></div>
-              <div class="form-group"><label class="form-label">Passing Grade TIU</label><input type="number" class="form-input" value="80"></div>
-              <div class="form-group"><label class="form-label">Passing Grade TKP</label><input type="number" class="form-input" value="166"></div>
-            </div>
-            <div class="form-group" style="margin-top:4px;">
-              <label class="form-label">Acak Soal Otomatis</label>
-              <select class="form-select">
-                <option selected>Ya - Soal diacak per peserta</option>
-                <option>Tidak - Urutan soal tetap</option>
-              </select>
-            </div>
-            <button class="btn btn-primary" type="button" onclick="showToast('Konfigurasi tryout belum disimpan ke database. Tahap berikutnya akan dibuat tabel pengaturan.','info')"><i class="bi bi-info-circle"></i> Simpan Konfigurasi</button>
+            <form method="post" action="<?= BASE_URL ?>/Admin/pengaturan/tryout" id="formTryoutSettings">
+              <?= csrf_field() ?>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="durasi_default">Durasi Default (menit)</label>
+                  <input type="number" class="form-input" id="durasi_default" name="durasi_default" min="1" max="300" value="<?= (int) $tryoutSettings['durasi_default'] ?>" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="jumlah_soal_per_sesi">Jumlah Soal per Sesi</label>
+                  <input type="number" class="form-input" id="jumlah_soal_per_sesi" value="<?= (int) $tryoutSettings['jumlah_soal_per_sesi'] ?>" readonly>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="soal_twk">Soal TWK</label>
+                  <input type="number" class="form-input tryout-count-input" id="soal_twk" name="soal_twk" min="0" max="200" value="<?= (int) $tryoutSettings['soal_twk'] ?>" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="soal_tiu">Soal TIU</label>
+                  <input type="number" class="form-input tryout-count-input" id="soal_tiu" name="soal_tiu" min="0" max="200" value="<?= (int) $tryoutSettings['soal_tiu'] ?>" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="soal_tkp">Soal TKP</label>
+                  <input type="number" class="form-input tryout-count-input" id="soal_tkp" name="soal_tkp" min="0" max="200" value="<?= (int) $tryoutSettings['soal_tkp'] ?>" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="passing_twk">Passing Grade TWK</label>
+                  <input type="number" class="form-input" id="passing_twk" name="passing_twk" min="0" max="500" value="<?= (int) $tryoutSettings['passing_twk'] ?>" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="passing_tiu">Passing Grade TIU</label>
+                  <input type="number" class="form-input" id="passing_tiu" name="passing_tiu" min="0" max="500" value="<?= (int) $tryoutSettings['passing_tiu'] ?>" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="passing_tkp">Passing Grade TKP</label>
+                  <input type="number" class="form-input" id="passing_tkp" name="passing_tkp" min="0" max="500" value="<?= (int) $tryoutSettings['passing_tkp'] ?>" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="acak_soal">Acak Soal Otomatis</label>
+                  <select class="form-select" id="acak_soal" name="acak_soal">
+                    <option value="1" <?= (int) $tryoutSettings['acak_soal'] === 1 ? 'selected' : '' ?>>Ya - Soal diacak per peserta</option>
+                    <option value="0" <?= (int) $tryoutSettings['acak_soal'] === 0 ? 'selected' : '' ?>>Tidak - Urutan soal tetap</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="acak_opsi">Acak Opsi Jawaban</label>
+                  <select class="form-select" id="acak_opsi" name="acak_opsi">
+                    <option value="0" <?= (int) $tryoutSettings['acak_opsi'] === 0 ? 'selected' : '' ?>>Tidak - Urutan opsi tetap</option>
+                    <option value="1" <?= (int) $tryoutSettings['acak_opsi'] === 1 ? 'selected' : '' ?>>Ya - Opsi ikut diacak</option>
+                  </select>
+                </div>
+              </div>
+              <button class="btn btn-primary" type="submit"><i class="bi bi-check-circle"></i> Simpan Konfigurasi</button>
+            </form>
           </div>
         </div>
       </div>
@@ -177,3 +214,19 @@ $infoRows = [
     </div>
   </div>
 </div>
+
+<script>
+  const countInputs = document.querySelectorAll('.tryout-count-input');
+  const totalInput = document.getElementById('jumlah_soal_per_sesi');
+
+  function syncTotalQuestions() {
+    let total = 0;
+    countInputs.forEach((input) => {
+      total += Math.max(0, parseInt(input.value || '0', 10));
+    });
+    totalInput.value = total;
+  }
+
+  countInputs.forEach((input) => input.addEventListener('input', syncTotalQuestions));
+  syncTotalQuestions();
+</script>
