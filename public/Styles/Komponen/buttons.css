@@ -5,6 +5,7 @@
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 5px;
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 12.5px;
@@ -15,6 +16,12 @@
   transition: all var(--transition-fast);
   border: 1.5px solid transparent;
   text-decoration: none;
+  line-height: 1.25;
+  min-width: 0;
+}
+
+.btn i {
+  flex-shrink: 0;
 }
 
 /* Button Variants */

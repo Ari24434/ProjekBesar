@@ -1,5 +1,3 @@
-//Landing Page HTML
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -31,11 +29,13 @@
     }
 
     * { box-sizing: border-box; }
+    html { max-width: 100%; overflow-x: hidden; }
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background: var(--white);
       color: var(--blue-deep);
+      max-width: 100%;
       overflow-x: hidden;
     }
 
@@ -530,9 +530,29 @@
     /* ─── CTA ─── */
     .cta-section {
       padding: 6rem 0;
-      background: linear-gradient(135deg, var(--blue-main) 0%, var(--blue-dark) 100%);
+      background-color: #1E54B7;
+      background:
+        radial-gradient(circle at 82% -10%, rgba(255,255,255,.08) 0 24%, transparent 25%),
+        radial-gradient(circle at 12% 105%, rgba(200,168,75,.12) 0 20%, transparent 21%),
+        linear-gradient(135deg, #1E54B7 0%, #0D2149 100%) !important;
       position: relative;
       overflow: hidden;
+      isolation: isolate;
+    }
+    .cta-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 58px 58px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .cta-section .container {
+      position: relative;
+      z-index: 1;
     }
     .cta-bg-blob {
       position: absolute;
@@ -547,9 +567,10 @@
       font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 700;
       color: var(--white);
+      color: var(--white) !important;
       margin-bottom: 1rem;
     }
-    .cta-sub { font-size: 1rem; color: rgba(255,255,255,.75); max-width: 500px; line-height: 1.7; margin-bottom: 2rem; }
+    .cta-sub { font-size: 1rem; color: rgba(255,255,255,.75) !important; max-width: 500px; line-height: 1.7; margin-bottom: 2rem; }
     .btn-cta {
       background: var(--white);
       color: var(--blue-main);
@@ -624,9 +645,154 @@
     }
 
     /* Responsive tweaks */
-    @media (max-width: 768px) {
-      .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    @media (max-width: 991.98px) {
+      .navbar-custom { padding: .75rem 0; }
+      .navbar-custom .container-fluid {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+      .navbar-brand {
+        min-width: 0;
+        max-width: calc(100% - 52px);
+      }
+      .navbar-brand-text {
+        display: block;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 1.08rem;
+      }
+      .navbar-toggler {
+        width: 40px;
+        height: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+      }
+      .navbar-collapse {
+        width: 100%;
+        margin-top: .85rem;
+        padding: .75rem;
+        border: 1px solid rgba(255,255,255,.09);
+        border-radius: 18px;
+        background: rgba(10,22,40,.98);
+        box-shadow: 0 18px 44px rgba(0,0,0,.28);
+      }
+      .navbar-nav { gap: .15rem !important; }
+      .nav-link-custom {
+        display: block;
+        width: 100%;
+        padding: .7rem .85rem !important;
+        border-radius: 12px;
+      }
+      .nav-link-custom:hover { background: rgba(255,255,255,.07); }
+      .navbar-collapse .d-flex {
+        width: 100%;
+        flex-direction: column;
+        gap: .55rem !important;
+        margin-top: .5rem;
+      }
+      .btn-nav-login,
+      .btn-nav-daftar {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+      }
+      .hero-section {
+        min-height: auto;
+        padding: 4.5rem 0 3rem;
+        align-items: flex-start;
+      }
+      .hero-title {
+        font-size: clamp(2.05rem, 9vw, 3rem);
+        line-height: 1.12;
+        overflow-wrap: anywhere;
+      }
+      .hero-subtitle {
+        font-size: .96rem;
+        line-height: 1.7;
+      }
+      .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+      }
+      .stat-divider { display: none; }
+      .hero-mockup {
+        max-width: 360px !important;
+        margin: 2rem auto 0;
+      }
       .float-badge { display: none; }
+    }
+
+    @media (max-width: 575.98px) {
+      .navbar-brand > div {
+        width: 34px !important;
+        height: 34px !important;
+        flex: 0 0 34px;
+      }
+      .hero-section {
+        padding: 2.6rem 0 3.2rem;
+      }
+      .hero-badge {
+        max-width: 100%;
+        white-space: normal;
+        border-radius: 16px;
+      }
+      .hero-title {
+        max-width: 360px;
+        font-size: clamp(2rem, 8.2vw, 2.25rem);
+        line-height: 1.08;
+        margin-bottom: 1.15rem;
+      }
+      .hero-subtitle {
+        max-width: 36ch;
+        font-size: .9rem;
+        line-height: 1.72;
+        margin-bottom: 1.65rem;
+      }
+      .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: .75rem;
+        max-width: 360px;
+      }
+      .hero-actions .btn {
+        width: 100%;
+        min-height: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        white-space: normal;
+      }
+      .hero-stats {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        max-width: 360px;
+        gap: .75rem;
+        margin-top: 2rem;
+      }
+      .hero-stat-number { font-size: 1.55rem; }
+      .hero-stat-label { font-size: .68rem; line-height: 1.25; }
+      .hero-mockup { display: none; }
+      .section-title,
+      .cta-title {
+        font-size: clamp(1.7rem, 10vw, 2.25rem);
+        line-height: 1.16;
+      }
+      .cta-section { padding: 4rem 0; }
+      .btn-cta,
+      .btn-cta-outline {
+        width: 100%;
+        min-height: 50px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        white-space: normal;
+      }
     }
   </style>
 </head>

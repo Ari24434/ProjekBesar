@@ -6,7 +6,7 @@
   <div class="container">
     <div class="row align-items-center gy-5">
       <div class="col-lg-6">
-        <div class="hero-badge"><i class="bi bi-shield-check-fill"></i> Platform Tryout CPNS Terpercaya</div>
+        
         <h1 class="hero-title">Raih Kelulusan<br/><span class="acc">CPNS</span> Impianmu<br/>Bersama Kami</h1>
         <p class="hero-sub">Simulasikan ujian SKD CPNS dengan sistem CAT berbasis web yang realistis, penilaian otomatis, dan analisis hasil lengkap. Dirancang khusus untuk peserta Oman's Club Academy.</p>
         <div class="hero-cta">

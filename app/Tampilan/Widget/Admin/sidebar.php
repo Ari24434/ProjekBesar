@@ -16,8 +16,8 @@
             data-menu="<?= $key ?>">
             <div class="nav-icon"><i class="bi <?= $item['icon'] ?>"></i></div>
             <?= $item['label'] ?>
-            <?php if ($item['badge']): ?>
-            <span class="nav-badge <?= $item['badge_class'] ?? '' ?>"><?= $item['badge'] ?></span>
+            <?php if ($item['badge'] !== null): ?>
+            <span class="nav-badge <?= $item['badge_class'] ?? '' ?>"><?= (int) $item['badge'] ?></span>
             <?php endif; ?>
         </a>
         <?php elseif ($item['section'] === 'laporan'): ?>
@@ -26,8 +26,8 @@
             data-menu="<?= $key ?>">
             <div class="nav-icon"><i class="bi <?= $item['icon'] ?>"></i></div>
             <?= $item['label'] ?>
-            <?php if ($item['badge']): ?>
-            <span class="nav-badge <?= $item['badge_class'] ?? '' ?>"><?= $item['badge'] ?></span>
+            <?php if ($item['badge'] !== null): ?>
+            <span class="nav-badge <?= $item['badge_class'] ?? '' ?>"><?= (int) $item['badge'] ?></span>
             <?php endif; ?>
         </a>
         <?php endif; ?>
@@ -40,26 +40,18 @@
             data-menu="<?= $key ?>">
             <div class="nav-icon"><i class="bi <?= $item['icon'] ?>"></i></div>
             <?= $item['label'] ?>
-            <?php if ($item['badge']): ?>
-            <span class="nav-badge <?= $item['badge_class'] ?? '' ?>"><?= $item['badge'] ?></span>
+            <?php if ($item['badge'] !== null): ?>
+            <span class="nav-badge <?= $item['badge_class'] ?? '' ?>"><?= (int) $item['badge'] ?></span>
             <?php endif; ?>
         </a>
         <?php endif; ?>
     <?php endforeach; ?>
-    <a href="<?= BASE_URL ?>/login">
-      <div class="nav-item danger">
+    <form method="post" action="<?= BASE_URL ?>/logout" style="margin:0;">
+      <?= csrf_field() ?>
+      <button type="submit" class="nav-item danger" style="width:100%;border:0;text-align:left;">
         <div class="nav-icon"><i class="bi bi-box-arrow-left"></i></div> Keluar
-      </div>
-    </a>
+      </button>
+    </form>
   </nav>
-  <div class="sb-footer">
-    <div class="sb-user-card">
-      <div class="sb-avatar">A</div>
-      <div class="sb-user-info">
-        <div class="sb-user-name">Admin Oman's</div>
-        <div class="sb-user-role">Super Administrator</div>
-      </div>
-      <div class="sb-logout-btn" onclick="konfirmKeluar()"><i class="bi bi-power"></i></div>
-    </div>
-  </div>
+  
 </aside>

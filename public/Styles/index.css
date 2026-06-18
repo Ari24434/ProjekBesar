@@ -17,8 +17,8 @@
    ================================================== */
 
 /* Base Styles */
-@import url('./Basis/reset.css');
 @import url('./Basis/variables.css');
+@import url('./Basis/reset.css');
 
 /* Layout */
 @import url('./Layout/main.css');
@@ -45,6 +45,7 @@
 @import url('./Halaman/landing-pages.css');
 @import url('./Halaman/login.css');
 @import url('./Halaman/about.css');
+@import url('./Halaman/analisis.css');
 
 /* Utilities */
 @import url('./Fitur/animations.css');

@@ -65,6 +65,36 @@
   min-height: 90px;
 }
 
+.image-preview {
+  margin-top: 9px;
+  border: 1.5px solid var(--smoke);
+  border-radius: var(--r-md);
+  background: var(--cloud);
+  padding: 8px;
+}
+
+.image-preview img {
+  display: block;
+  width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: var(--white);
+}
+
+.check-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11.5px;
+  color: var(--slate);
+  cursor: pointer;
+}
+
+.check-row input {
+  accent-color: var(--blue-main);
+}
+
 /* Select Input */
 .form-select {
   width: 100%;

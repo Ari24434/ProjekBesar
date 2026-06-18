@@ -22,15 +22,22 @@
   </nav>
   <div class="sb-footer">
     <div class="sb-user-card">
-      <div class="sb-avatar">R</div>
+      <div class="sb-avatar"><?= htmlspecialchars($userContext['initial'] ?? 'P') ?></div>
       <div class="sb-user-info">
-        <div class="sb-user-name">Rafi Firmansyah</div>
-        <div class="sb-user-role">Peserta Aktif</div>
+        <div class="sb-user-name"><?= htmlspecialchars($userContext['user']['nama'] ?? 'Peserta') ?></div>
+        <div class="sb-user-role"><?= htmlspecialchars(ucfirst($userContext['user']['status'] ?? 'aktif')) ?></div>
       </div>
       <div class="sb-logout-btn" onclick="konfirmKeluar()"><i class="bi bi-power"></i></div>
     </div>
   </div>
 </aside>
+<form id="logoutForm" method="post" action="<?= BASE_URL ?>/logout" style="display:none;">
+  <?= csrf_field() ?>
+</form>
 <script>
-  function konfirmKeluar() { if(confirm('Yakin ingin keluar?')) window.location.href='<?= BASE_URL ?>/login'; }
+  function konfirmKeluar() {
+    if (confirm('Yakin ingin keluar?')) {
+      document.getElementById('logoutForm').submit();
+    }
+  }
 </script>
