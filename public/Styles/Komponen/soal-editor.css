@@ -13,6 +13,37 @@
   transition: all var(--transition-fast);
 }
 
+.option-item-media {
+  display: block;
+}
+
+.option-main-row,
+.option-media-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.option-media-row {
+  margin-top: 8px;
+  padding-left: 33px;
+  align-items: flex-start;
+}
+
+.option-image-input {
+  max-width: 340px;
+}
+
+.option-image-preview {
+  width: 160px;
+  margin-top: 0;
+  flex-shrink: 0;
+}
+
+.option-image-preview img {
+  max-height: 90px;
+}
+
 .option-item.correct {
   border-color: var(--emerald);
   background: #F0FDF4;

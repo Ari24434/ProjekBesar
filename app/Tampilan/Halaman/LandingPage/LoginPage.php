@@ -14,7 +14,7 @@
 
   <!-- Center -->
   <div class="lp-center">
-    <div class="lp-tagline-badge"><i class="bi bi-shield-check-fill"></i> Platform Tryout CPNS Terpercaya</div>
+
     <h2 class="lp-heading">Satu Langkah Lebih<br/>Dekat Menuju<br/><span class="acc">Karir PNS</span></h2>
     <p class="lp-desc">Masuk ke akun kamu dan mulai berlatih dengan ribuan soal SKD CPNS yang terstruktur dan realistis.</p>
     <div class="lp-stats">
@@ -57,15 +57,23 @@
     </div>
 
 
+    <?php if (!empty($loginFlash)): ?>
+      <div class="error-box" style="display:flex;<?= ($loginFlash['type'] ?? '') === 'success' ? 'background:rgba(16,185,129,.10);border-color:rgba(16,185,129,.28);color:#047857;' : '' ?>">
+        <i class="bi <?= ($loginFlash['type'] ?? '') === 'success' ? 'bi-check-circle-fill' : 'bi-exclamation-circle-fill' ?>"></i>
+        <span><?= htmlspecialchars($loginFlash['message'] ?? '') ?></span>
+      </div>
+    <?php endif; ?>
+
     <!-- Form -->
-    <form id="loginForm" onsubmit="handleLogin(event)" novalidate>
+    <form id="loginForm" method="post" action="<?= BASE_URL ?>/login" novalidate>
+      <?= csrf_field() ?>
 
       <!-- Email -->
       <div>
         <label class="field-label" for="email">Alamat Email</label>
         <div class="field-wrap">
           <i class="bi bi-envelope field-icon"></i>
-          <input type="email" id="email" class="field-input" placeholder="contoh@email.com" autocomplete="email" required/>
+          <input type="email" id="email" name="email" class="field-input" placeholder="contoh@email.com" autocomplete="email" required/>
         </div>
       </div>
 
@@ -74,7 +82,7 @@
         <label class="field-label" for="password">Kata Sandi</label>
         <div class="field-wrap">
           <i class="bi bi-lock field-icon"></i>
-          <input type="password" id="password" class="field-input has-toggle" placeholder="Masukkan kata sandi" autocomplete="current-password" required/>
+          <input type="password" id="password" name="password" class="field-input has-toggle" placeholder="Masukkan kata sandi" autocomplete="current-password" required/>
           <button type="button" class="field-toggle" onclick="togglePwd()"><i class="bi bi-eye" id="eyeIcon"></i></button>
         </div>
       </div>
@@ -86,10 +94,10 @@
       </div>
 
       <!-- Submit -->
-      <a href="<?= BASE_URL; ?>/user/beranda" type="submit" class="btn-submit" id="submitBtn">
+      <button type="submit" class="btn-submit" id="submitBtn">
         <i class="bi bi-box-arrow-in-right"></i>
         <span id="btnTxt">Masuk Sekarang</span>
-      </a>
+      </button>
     </form>
 
 

@@ -10,10 +10,14 @@
     <link rel="stylesheet" href="<?= url('Styles/index.css') ?>">
 </head>
 <body>
+    <script>
+        window.APP_BASE_URL = '<?= rtrim(BASE_URL, '/') ?>';
+    </script>
     <?php
         include $content;
     ?>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="<?= url('Scripts/app.js') ?>"></script>
 </body>
 </html>

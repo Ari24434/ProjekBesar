@@ -7,10 +7,28 @@ function get($path, $callback) {
     $routes['GET'][$path] = $callback;
 }
 
+function post($path, $callback) {
+    global $routes;
+    $routes['POST'][$path] = $callback;
+}
+
+function delete($path, $callback) {
+    global $routes;
+    $routes['DELETE'][$path] = $callback;
+}
+
+function put($path, $callback) {
+    global $routes;
+    $routes['PUT'][$path] = $callback;
+}
+
 function request($uri, $method) {
     global $routes;
 
     $uri = parse_url($uri, PHP_URL_PATH);
+    $method = strtoupper($_POST['_method'] ?? $method);
+
+    middleware_handle($uri, $method);
 
     $callback = $routes[$method][$uri] ?? null;
 

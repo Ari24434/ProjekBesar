@@ -1,6 +1,6 @@
   <div class="topbar">
     <button class="tb-hamburger" onclick="toggleSb()"><i class="bi bi-list"></i></button>
-    <div class="tb-title" id="tb-title"><strong>Dashboard</strong></div>
+    <div class="tb-title" id="tb-title"><strong><?= $topbarTitle ?? 'Dashboard' ?></strong></div>
     <div class="tb-right">
       <div class="tb-icon-btn" title="Notifikasi" onclick="showToast('Ada 3 peserta baru mendaftar hari ini!','info')">
         <i class="bi bi-bell"></i>

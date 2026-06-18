@@ -10,7 +10,12 @@
     <link rel="stylesheet" href="<?= url('Styles/index.css') ?>">
 </head>
 <body>
+    <script>
+        window.APP_BASE_URL = '<?= rtrim(BASE_URL, '/') ?>';
+    </script>
     <?php
+        $userFlash = $_SESSION['flash'] ?? null;
+        unset($_SESSION['flash']);
         $nav_items = [
             'beranda' => [
                 'url' => 'user/beranda',
@@ -22,7 +27,7 @@
                 'url' => 'user/daftar-tryout',
                 'icon' => 'bi-journal-text',
                 'label' => 'Daftar Tryout',
-                'badge' => $tryout_tersedia ?? 3
+                'badge' => null
             ],
             'riwayat' => [
                 'url' => 'user/riwayat',
@@ -30,16 +35,10 @@
                 'label' => 'Riwayat',
                 'badge' => null
             ],
-            'analisis' => [
-                'url' => 'user/analisis',
-                'icon' => 'bi-bar-chart-line-fill',
-                'label' => 'Analisis',
-                'badge' => null
-            ],
             'profil' => [
                 'url' => 'user/profil',
                 'icon' => 'bi-person-fill',
-                'label' => 'Profil Saya',
+                'label' => 'Profil & Analisis',
                 'badge' => null
             ]
         ];
@@ -55,5 +54,19 @@
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="<?= url('Scripts/app.js') ?>"></script>
+    <?php if ($userFlash): ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const flash = <?= json_encode($userFlash, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT) ?>;
+            const type = (flash.type || 'info').toLowerCase();
+
+            if (window.showToast) {
+                window.showToast(flash.message || '', type);
+            }
+        });
+    </script>
+    <?php endif; ?>
 </body>
 </html>
